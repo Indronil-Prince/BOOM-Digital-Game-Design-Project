@@ -2,6 +2,6 @@ Group: Boom!
 Members:
 1)
 2) Indronil Bhattacharjee
-3)
+3) Mingfang Zhu
 4)
 5)
