@@ -1,7 +1,7 @@
 Group: Boom!
 Members:
-1) Redwan Ul Haq Choyon
+1) 
 2) Indronil Bhattacharjee
 3) Mingfang Zhu
-4)
-5)Sarhan Osman Bhuiya
+4) Redwan Ul Haq Choyon
+5) Sarhan Osman Bhuiya
