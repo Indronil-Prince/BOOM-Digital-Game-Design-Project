@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://btw4xw58y8phc"
+path="res://.godot/imported/DoubleDoorTallCabinet1.obj-0bb7bff204ac41f1fb68caace7f9c7b6.mesh"
+
+[deps]
+
+files=["res://.godot/imported/DoubleDoorTallCabinet1.obj-0bb7bff204ac41f1fb68caace7f9c7b6.mesh"]
+
+source_file="res://DoubleDoorTallCabinet1.obj"
+dest_files=["res://.godot/imported/DoubleDoorTallCabinet1.obj-0bb7bff204ac41f1fb68caace7f9c7b6.mesh", "res://.godot/imported/DoubleDoorTallCabinet1.obj-0bb7bff204ac41f1fb68caace7f9c7b6.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

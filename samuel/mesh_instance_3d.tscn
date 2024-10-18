@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=3 uid="uid://bspjio7th6kle"]
+
+[ext_resource type="PackedScene" uid="uid://dtok2aupexwyu" path="res://couch.gltf" id="1_gyung"]
+[ext_resource type="PackedScene" uid="uid://ykfras7mdbyg" path="res://Table_03.glb" id="2_mc850"]
+[ext_resource type="PackedScene" uid="uid://clkfq5bp05hrd" path="res://cactus_medium_B.gltf" id="3_l5wop"]
+[ext_resource type="PackedScene" uid="uid://cj4hajn5fyopx" path="res://couch_pillows.gltf" id="4_xg0uc"]
+[ext_resource type="PackedScene" uid="uid://d2qgn8clo0yiv" path="res://lamp_standing.gltf" id="5_k8aom"]
+[ext_resource type="PackedScene" uid="uid://cppuyxxv4seru" path="res://table_low.gltf" id="6_iqhqy"]
+[ext_resource type="PackedScene" uid="uid://ck6fu1752g6v4" path="res://WideDresser1.glb" id="7_3e8o7"]
+[ext_resource type="PackedScene" uid="uid://ddf1252gguhdn" path="res://Tv1.glb" id="8_xkrqb"]
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+
+[node name="couch2" parent="." instance=ExtResource("1_gyung")]
+transform = Transform3D(0.0418146, 0, 0.99944, 0, 1.25, 0, -1.2493, 0, 0.0334517, 1.16198, 0.723843, -0.849438)
+
+[node name="Table_032" parent="." instance=ExtResource("2_mc850")]
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.26507, 1.74389, 3.8683)
+
+[node name="cactus_medium_B2" parent="Table_032" instance=ExtResource("3_l5wop")]
+transform = Transform3D(1.25, 0, 0, 0, 1, 0, 0, 0, 1.25, 0.0784173, 0.189517, 0.0863481)
+
+[node name="couch_pillows2" parent="." instance=ExtResource("4_xg0uc")]
+transform = Transform3D(-0.899706, 0, -0.0255663, 0, 1, 0, 0.0230097, 0, -0.999673, 3.69892, 0.674247, 3.97117)
+
+[node name="lamp_standing2" parent="." instance=ExtResource("5_k8aom")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.804808, 0.787673, -3.62258)
+
+[node name="table_low2" parent="." instance=ExtResource("6_iqhqy")]
+transform = Transform3D(0.0188834, 0, 0.999822, 0, 1, 0, -0.999822, 0, 0.0188834, 3.90068, 0.72213, -0.777688)
+
+[node name="WideDresser12" parent="." instance=ExtResource("7_3e8o7")]
+transform = Transform3D(1.5, 0, 0, 0, 1.25, 0, 0, 0, 1, 4.23267, 1.17603, -4.46885)
+
+[node name="Tv12" parent="WideDresser12" instance=ExtResource("8_xkrqb")]
+transform = Transform3D(0.6, 0, 0, 0, 0.8, 0, 0, 0, 1, 0.0119905, 0.81665, -0.0448909)

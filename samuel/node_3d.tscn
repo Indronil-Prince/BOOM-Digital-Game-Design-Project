@@ -1,0 +1,185 @@
+[gd_scene load_steps=34 format=3 uid="uid://cnogeg83t8l07"]
+
+[ext_resource type="Script" path="res://node_3d.gd" id="1_clm2c"]
+[ext_resource type="PackedScene" uid="uid://wrvpbg1qaxkp" path="res://Bed_single.glb" id="1_itapf"]
+[ext_resource type="PackedScene" uid="uid://drcr5dkc7mm05" path="res://Chair_01.glb" id="2_g1krx"]
+[ext_resource type="PackedScene" uid="uid://dl7vvtp0pm3am" path="res://room.glb" id="3_nuf8q"]
+[ext_resource type="PackedScene" uid="uid://dby7f5jedejt5" path="res://Shelf_01.glb" id="4_f21cp"]
+[ext_resource type="PackedScene" uid="uid://cgy3e2j4jjarv" path="res://FootballBall1.glb" id="4_xe5fj"]
+[ext_resource type="PackedScene" uid="uid://bnxwsujmv52b5" path="res://Table_02.glb" id="5_5ioeq"]
+[ext_resource type="PackedScene" uid="uid://loxbaxti5sii" path="res://Chair_02.glb" id="6_g8yid"]
+[ext_resource type="PackedScene" uid="uid://b8sj0sb4omw7o" path="res://book_set.gltf" id="6_qryy4"]
+[ext_resource type="PackedScene" uid="uid://cgs1s6gcopcad" path="res://Wardrobe.glb" id="8_28fws"]
+[ext_resource type="PackedScene" uid="uid://dh7tklc3kl6nj" path="res://rug_rectangle_B.gltf" id="9_2udor"]
+[ext_resource type="PackedScene" uid="uid://c4n5wuegflily" path="res://room2.glb" id="9_yxsm0"]
+[ext_resource type="PackedScene" uid="uid://dtok2aupexwyu" path="res://couch.gltf" id="10_noy5s"]
+[ext_resource type="PackedScene" uid="uid://n1mc6w3l4lnm" path="res://directional_light_3d.tscn" id="11_0qlyg"]
+[ext_resource type="PackedScene" uid="uid://ykfras7mdbyg" path="res://Table_03.glb" id="11_mvwgq"]
+[ext_resource type="PackedScene" uid="uid://by2dwdskacec5" path="res://StylizedCharacter2.tscn" id="12_66eqm"]
+[ext_resource type="PackedScene" uid="uid://cj4hajn5fyopx" path="res://couch_pillows.gltf" id="12_mg6kq"]
+[ext_resource type="PackedScene" uid="uid://d2qgn8clo0yiv" path="res://lamp_standing.gltf" id="13_0av0m"]
+[ext_resource type="PackedScene" uid="uid://id0wlen2em1n" path="res://omni_light_3d.tscn" id="13_gaocx"]
+[ext_resource type="PackedScene" uid="uid://clkfq5bp05hrd" path="res://cactus_medium_B.gltf" id="14_l1kh8"]
+[ext_resource type="PackedScene" uid="uid://cppuyxxv4seru" path="res://table_low.gltf" id="16_nochh"]
+[ext_resource type="PackedScene" uid="uid://ck6fu1752g6v4" path="res://WideDresser1.glb" id="17_v7ub2"]
+[ext_resource type="PackedScene" uid="uid://ddf1252gguhdn" path="res://Tv1.glb" id="18_o6rav"]
+[ext_resource type="PackedScene" uid="uid://btkg1fqxrlc6n" path="res://room3.glb" id="19_atrap"]
+[ext_resource type="PackedScene" uid="uid://rdmkln76le2o" path="res://SteelSink1KitchenCabinet1.glb" id="19_njco6"]
+[ext_resource type="PackedScene" uid="uid://b0qqbjv3ce81" path="res://TopFridge1.glb" id="20_xc42r"]
+[ext_resource type="PackedScene" uid="uid://by2eabc3j4q2u" path="res://GasStove1.glb" id="21_ey55y"]
+[ext_resource type="PackedScene" uid="uid://dk2hmgwx00kgy" path="res://ModernKitchenTable1.glb" id="22_j1g3b"]
+[ext_resource type="PackedScene" uid="uid://fryr5mwt1baj" path="res://Blender1.glb" id="23_ecb0h"]
+[ext_resource type="PackedScene" uid="uid://csrsyn4mmgys" path="res://WoodKitchenTable1.glb" id="24_nef4s"]
+[ext_resource type="PackedScene" uid="uid://baskii4rsqujc" path="res://WoodenChair1.glb" id="25_6m7y0"]
+[ext_resource type="PackedScene" uid="uid://cjdr7ctaa0tal" path="res://CoffeeMachine1.glb" id="26_64q5i"]
+[ext_resource type="PackedScene" uid="uid://d0xue37xr1ofg" path="res://OvenSolo1.glb" id="27_yhlgy"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_clm2c")
+
+[node name="bedroom" parent="." instance=ExtResource("3_nuf8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.337459, -0.80678, -4.2916)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="bedroom"]
+
+[node name="Chair_012" parent="bedroom/MeshInstance3D" instance=ExtResource("2_g1krx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.05459, 0.890654, -4.44525)
+
+[node name="FootballBall12" parent="bedroom/MeshInstance3D/Chair_012" instance=ExtResource("4_xe5fj")]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -0.315797, 0.688127, 0.0360193)
+
+[node name="Table_022" parent="bedroom/MeshInstance3D" instance=ExtResource("5_5ioeq")]
+transform = Transform3D(0.9, 0, 0, 0, 1, 0, 0, 0, 1, 4.44972, 1.32642, 4.17644)
+
+[node name="Shelf_013" parent="bedroom/MeshInstance3D/Table_022" instance=ExtResource("4_f21cp")]
+transform = Transform3D(0.017535, 0, 0.449771, 0, 0.55, 0, -0.54972, 0, 0.0143468, -0.00806952, 1.13492, 0.484998)
+
+[node name="Chair_022" parent="bedroom/MeshInstance3D/Table_022" instance=ExtResource("6_g8yid")]
+transform = Transform3D(-0.999537, 0, -0.0304339, 0, 1, 0, 0.0304339, 0, -0.999537, 0.047718, 0.100026, -1.33695)
+
+[node name="book_set2" parent="bedroom/MeshInstance3D/Table_022" instance=ExtResource("6_qryy4")]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 1, -0.52926, 0.559392, 0.404424)
+
+[node name="book_set3" parent="bedroom/MeshInstance3D/Table_022" instance=ExtResource("6_qryy4")]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 1, -0.134058, 0.559, 0.404)
+
+[node name="Bed_single" parent="bedroom/MeshInstance3D" instance=ExtResource("1_itapf")]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.45, 1.04863, 1.45498, 3.03283)
+
+[node name="Wardrobe2" parent="bedroom/MeshInstance3D" instance=ExtResource("8_28fws")]
+transform = Transform3D(0.75, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 1.18721, 0.973078, -1.93168)
+
+[node name="rug_rectangle_B2" parent="bedroom/MeshInstance3D" instance=ExtResource("9_2udor")]
+transform = Transform3D(0.9, 0, 0, 0, 1, 0, 0, 0, 1, 4.54994, 0.740315, 0.825005)
+
+[node name="StylizedCharacter" parent="bedroom/MeshInstance3D" instance=ExtResource("12_66eqm")]
+transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, 4.68948, 1.7761, -1.98782)
+
+[node name="OmniLight3D" parent="bedroom/MeshInstance3D" instance=ExtResource("13_gaocx")]
+transform = Transform3D(0.018538, -0.999738, -0.0134573, 0.0348601, 0.0140977, -0.999293, 0.99922, 0.0180557, 0.0351123, 4.59814, 5.00493, -0.23729)
+light_energy = 4.0
+shadow_enabled = true
+omni_range = 710.86
+
+[node name="DirectionalLight3D" parent="bedroom" instance=ExtResource("11_0qlyg")]
+transform = Transform3D(1, 0, 0, 0, 0.0128628, 0.999917, 0, -0.999917, 0.0128628, -0.00629583, 6.34121, 5.14898)
+shadow_enabled = true
+shadow_transmittance_bias = 2.959
+
+[node name="living" parent="." instance=ExtResource("9_yxsm0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.376286, -0.810443, 5.718)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="living"]
+
+[node name="couch2" parent="living/MeshInstance3D" instance=ExtResource("10_noy5s")]
+transform = Transform3D(0.0418146, 0, 0.99944, 0, 1.25, 0, -1.2493, 0, 0.0334517, 1.16198, 0.723843, -0.849438)
+
+[node name="Table_032" parent="living/MeshInstance3D" instance=ExtResource("11_mvwgq")]
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.26507, 1.74389, 3.8683)
+
+[node name="cactus_medium_B2" parent="living/MeshInstance3D/Table_032" instance=ExtResource("14_l1kh8")]
+transform = Transform3D(1.25, 0, 0, 0, 1, 0, 0, 0, 1.25, 0.0784173, 0.189517, 0.0863481)
+
+[node name="couch_pillows2" parent="living/MeshInstance3D" instance=ExtResource("12_mg6kq")]
+transform = Transform3D(-0.899706, 0, -0.0255663, 0, 1, 0, 0.0230097, 0, -0.999673, 3.69892, 0.674247, 3.97117)
+
+[node name="lamp_standing2" parent="living/MeshInstance3D" instance=ExtResource("13_0av0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.804808, 0.787673, -3.62258)
+
+[node name="table_low2" parent="living/MeshInstance3D" instance=ExtResource("16_nochh")]
+transform = Transform3D(0.0188834, 0, 0.999822, 0, 1, 0, -0.999822, 0, 0.0188834, 3.90068, 0.72213, -0.777688)
+
+[node name="WideDresser12" parent="living/MeshInstance3D" instance=ExtResource("17_v7ub2")]
+transform = Transform3D(1.5, 0, 0, 0, 1.25, 0, 0, 0, 1, 4.23267, 1.17603, -4.46885)
+
+[node name="Tv12" parent="living/MeshInstance3D/WideDresser12" instance=ExtResource("18_o6rav")]
+transform = Transform3D(0.6, 0, 0, 0, 0.8, 0, 0, 0, 1, 0.0119905, 0.81665, -0.0448909)
+
+[node name="OmniLight3D" parent="living" instance=ExtResource("13_gaocx")]
+transform = Transform3D(-0.0479541, -0.0328701, 0.998309, -0.997376, -0.0526952, -0.0496443, 0.0542379, -0.99807, -0.0302569, 4.0612, 4.03259, 1.2275)
+light_energy = 1.808
+shadow_enabled = true
+omni_range = 710.86
+
+[node name="kitchen" parent="." instance=ExtResource("19_atrap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.58331, -0.812421, 5.71293)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="kitchen"]
+transform = Transform3D(-0.999995, 0, -0.00328131, 0, 1, 0, 0.00328131, 0, -0.999995, 7.37148, 0.00783801, 0.226503)
+skeleton = NodePath("")
+
+[node name="SteelSink1KitchenCabinet1" parent="kitchen/MeshInstance3D" instance=ExtResource("19_njco6")]
+transform = Transform3D(1.34987, 0, 0.0171911, 0, 1, 0, -0.0185664, 0, 1.24988, 5.51198, 1.23697, -4.05255)
+
+[node name="TopFridge12" parent="kitchen/MeshInstance3D" instance=ExtResource("20_xc42r")]
+transform = Transform3D(-0.999995, 0, 0.00328131, 0, 1, 0, -0.00328131, 0, -0.999995, 5.85025, 1.75286, 4.64001)
+
+[node name="GasStove12" parent="kitchen/MeshInstance3D" instance=ExtResource("21_ey55y")]
+transform = Transform3D(1.74768, 0, -0.0463025, 0, 1, 0, 0.0900326, 0, 0.898808, 4.17101, 1.58089, -4.0542)
+
+[node name="ModernKitchenTable12" parent="kitchen/MeshInstance3D" instance=ExtResource("22_j1g3b")]
+transform = Transform3D(0.999924, 0, -0.00925449, 0, 1, 0, 0.0123393, 0, 0.749943, 3.66798, 1.35312, 4.5653)
+
+[node name="Blender12" parent="kitchen/MeshInstance3D/ModernKitchenTable12" instance=ExtResource("23_ecb0h")]
+transform = Transform3D(-0.0443692, 0, -0.999015, 0, 1, 0, 1.33202, 0, -0.0591588, -0.0402813, 0.358284, 0.0360607)
+
+[node name="WoodKitchenTable12" parent="kitchen/MeshInstance3D" instance=ExtResource("24_nef4s")]
+transform = Transform3D(-0.0255838, 0, -0.999673, 0, 1, 0, 0.999673, 0, -0.0255838, 4.45293, 0.842166, 0.153031)
+
+[node name="WoodenChair12" parent="kitchen/MeshInstance3D/WoodKitchenTable12" instance=ExtResource("25_6m7y0")]
+transform = Transform3D(0.994309, 0, -0.106542, 0, 1, 0, 0.106542, 0, 0.994309, -0.0482097, 0.51927, -0.854981)
+
+[node name="WoodenChair15" parent="kitchen/MeshInstance3D/WoodKitchenTable12" instance=ExtResource("25_6m7y0")]
+transform = Transform3D(0.0616237, 0, -0.998101, 0, 1, 0, 0.998101, 0, 0.0616237, 1.63055, 0.412018, -0.0888734)
+
+[node name="WoodenChair13" parent="kitchen/MeshInstance3D/WoodKitchenTable12" instance=ExtResource("25_6m7y0")]
+transform = Transform3D(-0.990943, 0, -0.134298, 0, 1, 0, 0.134298, 0, -0.990943, -0.0689812, 0.514655, 0.894739)
+
+[node name="WoodenChair14" parent="kitchen/MeshInstance3D/WoodKitchenTable12" instance=ExtResource("25_6m7y0")]
+transform = Transform3D(0.0712187, 0, 0.997464, 0, 1, 0, -0.997464, 0, 0.0712187, -1.53122, 0.51004, -0.121068)
+
+[node name="ModernKitchenTable13" parent="kitchen/MeshInstance3D" instance=ExtResource("22_j1g3b")]
+transform = Transform3D(0.00596691, 0, -0.564855, 0, 1, 0, 0.996248, 0, -0.0392449, -0.175178, 1.41983, -0.100201)
+
+[node name="ModernKitchenTable14" parent="kitchen/MeshInstance3D/ModernKitchenTable13" instance=ExtResource("22_j1g3b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 1.49012e-08, 0, 1, 1.7314, 0, 0.00354141)
+
+[node name="OvenSolo12" parent="kitchen/MeshInstance3D/ModernKitchenTable13/ModernKitchenTable14" instance=ExtResource("27_yhlgy")]
+transform = Transform3D(-1.24535, 0, -0.129247, 0, 1, 0, 0.107706, 0, -1.49442, 0, 0.483972, 0)
+
+[node name="CoffeeMachine12" parent="kitchen/MeshInstance3D/ModernKitchenTable13" instance=ExtResource("26_64q5i")]
+transform = Transform3D(0.999949, 0, 0.0101576, 0, 1, 0, -0.0101576, 0, 0.999949, 0, 0.805528, 0)
+
+[node name="OmniLight3D" parent="kitchen" instance=ExtResource("13_gaocx")]
+transform = Transform3D(0.0892295, -0.993073, -0.0764468, 0.0976925, 0.0851091, -0.991571, 0.991208, 0.0810091, 0.10461, 3.21989, 4.98808, 0.53037)
+light_energy = 1.808
+shadow_enabled = true
+omni_range = 710.86
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.0471236, -0.456967, 0.888235, 0.059906, 0.888915, 0.454139, -0.997091, 0.0318099, 0.069264, 10.9884, 4.24757, -4.00629)
+keep_aspect = 0
+doppler_tracking = 2
+current = true
+fov = 95.625
+near = 0.106
