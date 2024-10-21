@@ -24,9 +24,14 @@ func _process(delta: float) -> void:
 func toggle_camera():
 	# Deactivate the current camera
 	cameras[current_camera_index].current = false
-	current_camera_index = (current_camera_index + 1) % cameras.size()
+	if current_camera_index == 0:
+		current_camera_index = 1
+	else:
+		current_camera_index = 0
 	# Activate the new current camera
 	cameras[current_camera_index].current = true
 	print("Switched to: ", cameras[current_camera_index].name)
-	#if cameras[current_camera_index].name == "Camera3D2":
-		#$BlenderPopup.show()
+	if cameras[current_camera_index].name == "Camera3D2":
+		$BlenderPopup.popup_centered()
+	else:
+		$BlenderPopup.hide()
