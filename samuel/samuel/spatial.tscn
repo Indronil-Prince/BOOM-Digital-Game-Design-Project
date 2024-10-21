@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bxxxslwjkt4p8"]
+
+[node name="Spatial" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0125861, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
