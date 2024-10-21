@@ -1207,7 +1207,7 @@ text = "1. Shake hands and get introduced to Samuel "
 offset_top = 25.0
 offset_right = 265.0
 offset_bottom = 48.0
-text = "2. Move Samuel to the kitchen"
+text = "2. Move Samuel to the living space"
 
 [node name="Label3" type="Label" parent="Camera3D/TaskWindow"]
 offset_top = 50.0
@@ -1730,22 +1730,6 @@ transform = Transform3D(0.943613, 0.32705, 0.0513076, -0.327482, 0.944857, 0, -0
 [node name="BlenderPosition" type="Node3D" parent="CharacterBody3D"]
 transform = Transform3D(0.943613, 0.32705, 0.0513076, -0.327482, 0.944857, 0, -0.0484784, -0.0168023, 0.998683, -10.0607, -0.0874518, 8.80458)
 
-[node name="SamuelPopup" type="Popup" parent="CharacterBody3D"]
-transparent_bg = true
-position = Vector2i(526, 274)
-unresizable = false
-transparent = true
-extend_to_title = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CharacterBody3D/SamuelPopup"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Button" type="Button" parent="CharacterBody3D/SamuelPopup/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 29
-text = "ABCD"
-
 [node name="BlenderPopup" type="Popup" parent="."]
 visible = true
 script = ExtResource("41_rbjhu")
@@ -1757,5 +1741,4 @@ offset_bottom = 40.0
 [node name="Button" type="Button" parent="BlenderPopup/VBoxContainer"]
 layout_mode = 2
 
-[connection signal="pressed" from="CharacterBody3D/SamuelPopup/VBoxContainer/Button" to="CharacterBody3D" method="_on_button_pressed"]
 [connection signal="pressed" from="BlenderPopup/VBoxContainer/Button" to="BlenderPopup" method="_on_Button_pressed"]

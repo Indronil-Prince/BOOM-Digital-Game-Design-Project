@@ -8,6 +8,11 @@ extends CharacterBody3D
 
 @onready var animation_player = $Happy_Walk/Walking_Animation
 
+var moveSamuelButton : Button
+var moveSamuelPopup : Popup
+var instructionCounter = 0
+var taskWindowLabel : Label
+
 var current_target = Vector3()  # Current target position
 var moving_to_target = true  # To control whether the character is moving
 var target_stage = 0  # Track which target we are moving towards (0 for living room, 1 for kitchen, 2 for blender)
@@ -16,9 +21,17 @@ var turning = false  # Track whether the character is currently turning
 func _ready():
 	# Start moving towards the first target, LivingRoomPosition
 	current_target = living_room_position
-	start_walking_animation()
+	# Stop Samuel from walking automatically with game start
+	moving_to_target = false
+	moveSamuelPopup = $SamuelPopup
+	moveSamuelButton = $SamuelPopup/VBoxContainer/Button
+	taskWindowLabel = get_node("/root/Node3D/Camera3D/TaskWindow/Label2")
+	
 
 func _process(delta: float) -> void:
+	moveSamuelPopup.popup_centered()
+	moveSamuelButton.text = "Say: Move to the kitchen"
+	
 	if moving_to_target and not turning:
 		# Calculate direction towards the target position
 		var direction = (current_target - global_transform.origin).normalized()
@@ -44,6 +57,7 @@ func _process(delta: float) -> void:
 				# Reached KitchenPosition, now turn to move to BlenderPosition
 				target_stage += 1
 				turn_and_move_to_next_target(blender_position)
+				taskWindowLabel.add_theme_color_override("font_color", Color(1, 0.5, 0))
 
 func turn_and_move_to_next_target(next_target: Vector3) -> void:
 	# Simulate turning with a delay, then move to the next target
@@ -69,3 +83,15 @@ func start_walking_animation() -> void:
 func stop_walking_animation() -> void:
 	if animation_player != null and animation_player.is_playing():
 		animation_player.stop()
+
+
+func _on_button_pressed() -> void:
+	instructionCounter+=1
+	moveSamuelButton.text += " x:" + str(instructionCounter)
+	if instructionCounter >=3:
+		moveSamuelButton.hide()
+		$SamuelPopup/VBoxContainer.hide()
+		$SamuelPopup.hide()
+		
+		moving_to_target = true
+		start_walking_animation()
