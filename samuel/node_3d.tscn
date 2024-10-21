@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=4 uid="uid://cnogeg83t8l07"]
+[gd_scene load_steps=52 format=4 uid="uid://cnogeg83t8l07"]
 
 [ext_resource type="Script" path="res://node_3d.gd" id="1_clm2c"]
 [ext_resource type="PackedScene" uid="uid://wrvpbg1qaxkp" path="res://Bed_single.glb" id="1_itapf"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://cjdr7ctaa0tal" path="res://CoffeeMachine1.glb" id="26_64q5i"]
 [ext_resource type="PackedScene" uid="uid://d0xue37xr1ofg" path="res://OvenSolo1.glb" id="27_yhlgy"]
 [ext_resource type="AudioStream" uid="uid://c5600g10f2ed1" path="res://blender-audio.mp3" id="30_ka81j"]
+[ext_resource type="PackedScene" uid="uid://bg4y2y10c2qqn" path="res://vibration.glb" id="31_a6ubo"]
 [ext_resource type="Environment" uid="uid://c4j3ml7am84t0" path="res://node_3d.tres" id="34_8gakm"]
 [ext_resource type="Script" path="res://camera_3d.gd" id="34_mnqtc"]
 [ext_resource type="Script" path="res://character_body_3d.gd" id="36_2npn5"]
@@ -42,6 +43,7 @@
 [ext_resource type="Texture2D" uid="uid://ca1j8264dbb0x" path="res://boy/Happy Walk_0.png" id="38_ilak5"]
 [ext_resource type="Texture2D" uid="uid://xd8r43brguxr" path="res://boy/Happy Walk_3.png" id="39_854cc"]
 [ext_resource type="Script" path="res://popup.gd" id="41_rbjhu"]
+[ext_resource type="Script" path="res://welcome.gd" id="43_24a6t"]
 
 [sub_resource type="Animation" id="Animation_1kq1b"]
 resource_name = "Take 001"
@@ -1147,6 +1149,10 @@ transform = Transform3D(-1.28836, 0, 0.281081, 0, 1, 0, -0.34114, 0, -0.960481, 
 stream = ExtResource("30_ka81j")
 volume_db = 1.524
 
+[node name="vibration" parent="kitchen/MeshInstance3D/BlenderTable/Blender12" instance=ExtResource("31_a6ubo")]
+transform = Transform3D(0.00289843, 0.000872778, 0.000688457, 0.000408822, 8.64217e-05, -0.00495218, -0.000657247, 0.00390266, -4.43016e-05, -0.0775262, 0.678012, -0.0650797)
+visible = false
+
 [node name="WoodKitchenTable12" parent="kitchen/MeshInstance3D" instance=ExtResource("24_nef4s")]
 transform = Transform3D(-0.0255838, 0, -0.999673, 0, 1, 0, 0.999673, 0, -0.0255838, 4.45293, 0.842166, 0.153031)
 
@@ -1193,7 +1199,8 @@ script = ExtResource("34_mnqtc")
 [node name="TaskWindow" type="Window" parent="Camera3D"]
 title = "Task List"
 position = Vector2i(740, 36)
-size = Vector2i(400, 200)
+size = Vector2i(400, 230)
+visible = false
 script = ExtResource("37_cp7if")
 
 [node name="Label1" type="Label" parent="Camera3D/TaskWindow"]
@@ -1238,6 +1245,21 @@ offset_top = 150.0
 offset_right = 212.0
 offset_bottom = 173.0
 text = "7. Vacuums clean the space"
+
+[node name="LabelPoint" type="Label" parent="Camera3D/TaskWindow"]
+offset_top = 200.0
+offset_right = 40.0
+offset_bottom = 223.0
+theme_override_font_sizes/font_size = 25
+text = "Point: "
+
+[node name="Point" type="Label" parent="Camera3D/TaskWindow"]
+offset_left = 80.0
+offset_top = 200.0
+offset_right = 120.0
+offset_bottom = 235.0
+theme_override_font_sizes/font_size = 25
+text = "0"
 
 [node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(0.455436, 0, 0.890269, 0, 1, 0, -0.890269, 0, 0.455436, -1.21407, 1.18963, 3.37956)
@@ -1742,12 +1764,30 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Button" type="Button" parent="CharacterBody3D/SamuelPopup/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 29
 text = "ABCD"
 
+[node name="Welcome" type="Window" parent="CharacterBody3D"]
+title = "Household Chores with Samuel"
+initial_position = 1
+size = Vector2i(300, 150)
+script = ExtResource("43_24a6t")
+
+[node name="Button" type="Button" parent="CharacterBody3D/Welcome"]
+offset_right = 300.0
+offset_bottom = 50.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 30
+text = "Start Game"
+icon_alignment = 1
+
 [node name="BlenderPopup" type="Popup" parent="."]
+transparent_bg = true
 visible = true
+transparent = true
 script = ExtResource("41_rbjhu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="BlenderPopup"]
@@ -1758,4 +1798,6 @@ offset_bottom = 40.0
 layout_mode = 2
 
 [connection signal="pressed" from="CharacterBody3D/SamuelPopup/VBoxContainer/Button" to="CharacterBody3D" method="_on_button_pressed"]
+[connection signal="close_requested" from="CharacterBody3D/Welcome" to="CharacterBody3D/Welcome" method="_on_close_requested"]
+[connection signal="pressed" from="CharacterBody3D/Welcome/Button" to="CharacterBody3D/Welcome" method="_on_button_pressed"]
 [connection signal="pressed" from="BlenderPopup/VBoxContainer/Button" to="BlenderPopup" method="_on_Button_pressed"]

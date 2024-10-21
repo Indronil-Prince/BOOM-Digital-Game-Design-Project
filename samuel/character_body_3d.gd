@@ -12,6 +12,7 @@ var moveSamuelButton : Button
 var moveSamuelPopup : Popup
 var instructionCounter = 0
 var taskWindowLabel : Label
+var taskWindowPoint : Label
 
 var current_target = Vector3()  # Current target position
 var moving_to_target = true  # To control whether the character is moving
@@ -26,6 +27,7 @@ func _ready():
 	moveSamuelPopup = $SamuelPopup
 	moveSamuelButton = $SamuelPopup/VBoxContainer/Button
 	taskWindowLabel = get_node("/root/Node3D/Camera3D/TaskWindow/Label2")
+	taskWindowPoint = get_node("/root/Node3D/Camera3D/TaskWindow/Point")
 	
 
 func _process(delta: float) -> void:
@@ -58,6 +60,7 @@ func _process(delta: float) -> void:
 				target_stage += 1
 				turn_and_move_to_next_target(blender_position)
 				taskWindowLabel.add_theme_color_override("font_color", Color(1, 0.5, 0))
+				taskWindowPoint.text = "50"
 
 func turn_and_move_to_next_target(next_target: Vector3) -> void:
 	# Simulate turning with a delay, then move to the next target
