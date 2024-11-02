@@ -21,6 +21,10 @@ func set_children_visibility(node, visibility):
 func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_Z):
 		toggle_camera()
+	if Input.is_key_pressed(KEY_3):
+		$Camera3D2.global_transform.origin = Vector3(6.23, 1.10, 3)
+		#$Camera3D2.rotate_y(deg2rad(180))
+		toggle_camera()
 func toggle_camera():
 	# Deactivate the current camera
 	cameras[current_camera_index].current = false

@@ -13,6 +13,7 @@ var moveSamuelPopup : Popup
 var instructionCounter = 0
 var taskWindowLabel : Label
 var taskWindowPoint : Label
+var kitechenAudio : AudioStreamPlayer3D
 
 var current_target = Vector3()  # Current target position
 var moving_to_target = true  # To control whether the character is moving
@@ -28,11 +29,11 @@ func _ready():
 	moveSamuelButton = $SamuelPopup/VBoxContainer/Button
 	taskWindowLabel = get_node("/root/Node3D/Camera3D/TaskWindow/Label2")
 	taskWindowPoint = get_node("/root/Node3D/Camera3D/TaskWindow/Point")
-	
+	kitechenAudio = get_node("/root/Node3D/kitchen/AudioStreamKitchen")
 
 func _process(delta: float) -> void:
 	moveSamuelPopup.popup_centered()
-	moveSamuelButton.text = "Say: Move to the kitchen"
+	moveSamuelButton.text = "Say: Go to kitchen"
 	
 	if moving_to_target and not turning:
 		# Calculate direction towards the target position
@@ -90,6 +91,7 @@ func stop_walking_animation() -> void:
 
 func _on_button_pressed() -> void:
 	instructionCounter+=1
+	kitechenAudio.play()
 	moveSamuelButton.text += " x:" + str(instructionCounter)
 	if instructionCounter >=3:
 		moveSamuelButton.hide()
