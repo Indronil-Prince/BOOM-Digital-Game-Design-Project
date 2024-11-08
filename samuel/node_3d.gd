@@ -1,5 +1,6 @@
 extends Node3D
 
+signal run
 var soundWindow: Popup
 var lightWindow: Popup
 var tempWindow: Popup
@@ -18,6 +19,7 @@ var tempReading: Label
 var light : OmniLight3D
 var temp: TextureButton
 var panel: Panel
+var exc: Sprite3D
 
 var is_playing = false
 var volume_step = 2.0
@@ -52,6 +54,7 @@ func _ready():
 	temp_down_button = $living/MeshInstance3D/Thermostat/TempWindow/TempPopup/TempDownButton
 	tempReading = $living/MeshInstance3D/Thermostat/TempWindow/TempPopup/TempReading
 	panel = $Dialog/Panel2
+	exc = $CharacterBody3D/ExclamationSprite
 
 func set_children_visibility(node, visibility):
 	for child in node.get_children():
@@ -86,7 +89,9 @@ func _on_PlayButton_pressed():
 		audio.play()
 		is_playing = true
 		playLabel.text = "Stop Music"
-
+		exc.visible = true
+		exc.rotate_y(deg_to_rad(90))
+		$CharacterBody3D.on_c_pressed()
 func _on_VolumeUpButton_pressed():
 	if is_playing:  # Adjust volume only if audio is playing
 		audio.volume_db += volume_step
@@ -95,6 +100,7 @@ func _on_VolumeUpButton_pressed():
 		if audio.volume_db < -10:
 			#lightWindow.popup()
 			#tempWindow.popup()
+			exc.visible = false
 			print("Sound is good now!")
 
 func _on_VolumeDownButton_pressed():
@@ -105,6 +111,7 @@ func _on_VolumeDownButton_pressed():
 		if audio.volume_db < -10:
 			#lightWindow.popup()
 			#tempWindow.popup()
+			exc.visible = false
 			print("Sound is good now!")
 			
 func _on_LightUpButton_pressed():

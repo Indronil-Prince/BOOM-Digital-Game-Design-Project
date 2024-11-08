@@ -15,6 +15,20 @@ var instructionCounter = 0
 var taskWindowLabel : Label
 var taskWindowPoint : Label
 var kitechenAudio : AudioStreamPlayer3D
+var pointLabel: Label
+var gameTimerLabel: Label
+var dialogAudioPlayer: AudioStreamPlayer3D
+
+var target_string: String
+var sayHelloTask: bool
+var moveToLivingRoomTask: bool
+var adjustLightMusicTempTask: bool
+var blenderTask: bool
+var vaccuamCleanTask: bool
+var foodTask: bool
+var time: String
+var countdown_time = 6 * 60
+var first_click_time = -1
 
 var current_target = Vector3()  # Current target position
 var moving_to_target = false  # To control whether the character is moving
@@ -24,8 +38,16 @@ var returning = false  # Flag to check if character is returning after blender i
 var direct_move = false  # Flag to check if we are directly moving to a target without sequence
 
 func _ready():
-	# Set the first target but don't start moving automatically
+	sayHelloTask = false
+	moveToLivingRoomTask = false
+	adjustLightMusicTempTask = false
+	blenderTask = false
+	vaccuamCleanTask = false
+	foodTask = false 	
+	# Start moving towards the first target, LivingRoomPosition
 	current_target = living_room_position
+	# Stop Samuel from walking automatically with game start
+	moving_to_target = false
 
 	# Reference the popup and button
 	moveSamuelPopup = $SamuelPopup
@@ -37,6 +59,10 @@ func _ready():
 	var blender_node = get_node("/root/Node3D/BlenderPopup")  # Adjusted path to BlenderPopup
 	blender_node.connect("blender_turned_on", Callable(self, "_on_blender_turned_on"))
 	kitechenAudio = get_node("/root/Node3D/kitchen/AudioStreamKitchen")
+	
+	pointLabel = $"../Camera3D/TaskWindow/Point"
+	gameTimerLabel = $"../Camera3D/TaskWindow/GameTimer"
+	dialogAudioPlayer = $"../Camera3D/TaskWindow/dialogAudioPlayer"
 
 func _process(delta: float) -> void:
 #func _process(delta: float) -> void:
@@ -48,7 +74,17 @@ func _process(delta: float) -> void:
 		on_c_pressed()
 
 	moveSamuelPopup.popup()
-	moveSamuelButton.text = "Say: Move to the kitchen"
+	handleTimer(delta)
+	
+	if sayHelloTask == false:
+		target_string = "Say: Hello Samuel!"
+		moveSamuelButton.text = target_string
+		moveSamuelButton.text += " x:" + str(instructionCounter)
+	elif sayHelloTask == true && moveToLivingRoomTask == false:
+		#print ("inside elif condition")
+		target_string = "Say: Go to kitchen"
+		moveSamuelButton.text = target_string
+		moveSamuelButton.text += " x:" + str(instructionCounter)
 
 	# Main movement logic
 	if moving_to_target and not turning:
@@ -195,11 +231,76 @@ func stop_exclamation() -> void:
 		exclamation_sprite.visible = false
 
 func _on_button_pressed() -> void:
-	instructionCounter += 1
-	moveSamuelButton.text += " x:" + str(instructionCounter)
+	
+	instructionCounter+=1
+	#target_string = "Say: Hello Samuel!"
+	
+	if target_string in "Say: Hello Samuel!" :
+		
+		dialogAudioPlayer.play()
+		time = getElapsedTime()
+		print("elasped time: ", time , "Secs")
+		if(time.to_float() > 0.0 && time.to_float() <=2.0):
+			popupCoach()
+			instructionCounter = instructionCounter- 1
+		if instructionCounter >=3:
+			print ("Hello Samuel Said by the user")
+			popupSamuel()
+			instructionCounter = 0;
+			moveSamuelButton.text = ""
+			sayHelloTask = true
+			time = ""
+	
+	elif  target_string in "Say: Go to kitchen":
+		first_click_time == -1
+		kitechenAudio.play()
+		time = getElapsedTime()
+		print("elasped time: ", time , "Secs")
+		if(time.to_float() > 0.0 && time.to_float() <=2.0):
+			popupCoach()
+			instructionCounter = instructionCounter -1
+		if instructionCounter >=3:
+			#print("button pressed elif")
+			kitechenAudio.play()
+			moveToLivingRoomTask = true
+			moveSamuelButton.hide()
+			$SamuelPopup/VBoxContainer.hide()
+			$SamuelPopup.hide()
+			instructionCounter = 0;
+			time = ""
+			
+			moveToLivingRoomTask =true
+			moving_to_target = true
+			on_l_pressed()
 
-	if instructionCounter >= 3:
-		moveSamuelButton.hide()
-		$SamuelPopup/VBoxContainer.hide()
-		$SamuelPopup.hide()
-		moving_to_target = false
+func handleTimer(delta)-> void :
+	if countdown_time > 0:
+		countdown_time -= delta  # Subtract the delta time from the countdown
+		var minutes = int(countdown_time) / 60
+		var seconds = int(countdown_time) % 60
+		#gameTimerLabel.text = ""
+		pointLabel.text = str("%0.2f" %countdown_time)
+		gameTimerLabel.text = str(minutes).pad_zeros(2) + ":" + str(seconds).pad_zeros(2)  # Format as MM:SS
+	else:
+		gameTimerLabel.text = "00:00"  # Display when countdown reaches zero
+		set_process(false)  # Stop updating once the countdown is over
+
+func getElapsedTime()-> String :
+	var elapsed_time = 0.0
+	if instructionCounter%2 == 1:
+		# This is the first click; record the time
+		first_click_time = Time.get_ticks_msec()
+		print("First button click recorded.")
+	else:
+		# This is the second click; calculate the elapsed time
+		var second_click_time = Time.get_ticks_msec()
+		elapsed_time = (second_click_time - first_click_time) / 1000.0  
+		print("Time elapsed between clicks: ", elapsed_time, " seconds")	
+	return str(elapsed_time)
+		
+func popupCoach()-> void :
+	print("coach popup is called")	
+
+func popupSamuel()-> void:
+	print("Samuel popup is called")		
+	
