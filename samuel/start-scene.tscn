@@ -14,18 +14,19 @@ offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 layout_mode = 0
-offset_right = 1792.0
-offset_bottom = 1024.0
+offset_right = 2982.0
+offset_bottom = 1557.0
 scale = Vector2(0.65, 0.65)
 texture = ExtResource("1_dy544")
+expand_mode = 3
 stretch_mode = 5
 
 [node name="TextureButton" type="TextureButton" parent="Control"]
 layout_mode = 0
-offset_left = 485.0
-offset_top = 480.0
-offset_right = 682.0
-offset_bottom = 541.0
+offset_left = 853.0
+offset_top = 774.0
+offset_right = 1050.0
+offset_bottom = 835.0
 texture_normal = ExtResource("2_2tjd2")
 script = ExtResource("3_grl2o")
 

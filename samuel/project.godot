@@ -15,6 +15,12 @@ run/main_scene="res://start-scene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=1900
+window/size/viewport_height=968
+window/size/mode=2
+
 [filesystem]
 
 import/blender/enabled=false

@@ -5,6 +5,8 @@ var button: Button
 var audio: AudioStreamPlayer3D
 var vibration: Node3D
 
+signal blender_turned_on
+
 func _ready():
 	# Assuming the button is a direct child of the popup, adjust the path as necessary
 	button = $VBoxContainer/Button
@@ -21,6 +23,7 @@ func _on_Button_pressed():
 		button.text = "Turn Off" 
 		audio.play()
 		vibration.visible = true
+		emit_signal("blender_turned_on")
 	else:
 		button.text =  "Turn On"
 		audio.stop()
