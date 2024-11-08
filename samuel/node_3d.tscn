@@ -1447,7 +1447,7 @@ script = ExtResource("34_mnqtc")
 
 [node name="TaskWindow" type="Window" parent="Camera3D"]
 title = "Task List"
-position = Vector2i(195, 36)
+position = Vector2i(1500, 36)
 size = Vector2i(400, 230)
 script = ExtResource("37_cp7if")
 
@@ -2022,7 +2022,7 @@ transform = Transform3D(0.943613, 0.32705, 0.0513076, -0.327482, 0.944857, 0, -0
 
 [node name="SamuelPopup" type="Popup" parent="CharacterBody3D"]
 title = "Instruction"
-position = Vector2i(195, 320)
+position = Vector2i(1500, 320)
 size = Vector2i(400, 100)
 visible = true
 unresizable = false
