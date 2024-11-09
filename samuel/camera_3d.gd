@@ -22,13 +22,13 @@ func _process(delta):
 		input_vector.y -= 1
 	# Check for up and down arrow keys for forward and backward movement
 	if Input.is_key_pressed(KEY_UP):
-		input_vector.z -= 1
-		input_vector.y += 1
+		input_vector.z -= 0.3
+		input_vector.y += 0.1
 		pitch_change += rotation_speed
 		#rotate_y(deg_to_rad(5))
 	if Input.is_key_pressed(KEY_DOWN):
-		input_vector.z += 1
-		input_vector.y -= 1  # Positive z-direction is backward
+		input_vector.z += 0.3
+		input_vector.y -= 0.1  # Positive z-direction is backward
 		pitch_change -= rotation_speed
 		#rotate_y(deg_to_rad(5))
 	# Normalize the move vector to have consistent movement speed

@@ -21,6 +21,8 @@ var temp: TextureButton
 var panel: Panel
 var exc: Sprite3D
 
+
+
 var is_playing = false
 var volume_step = 2.0
 var intensity_step = 0.5
@@ -67,16 +69,8 @@ func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_Z):
 		toggle_camera()
 	if Input.is_key_pressed(KEY_3):
-		if $Camera3DSpeaker.current == false:
-			$Camera3DSpeaker.current = true
-			soundWindow.popup()
-			lightWindow.popup()
-			tempWindow.popup()
-		else:
-			$Camera3DSpeaker.current = false
-			soundWindow.hide()
-			lightWindow.hide()
-			tempWindow.hide()
+		onKey3Pressed()
+		
 		#global_transform.origin = Vector3(6.752, 0.517, 9.221)
 
 func _on_PlayButton_pressed():
@@ -102,6 +96,7 @@ func _on_VolumeUpButton_pressed():
 			#tempWindow.popup()
 			exc.visible = false
 			print("Sound is good now!")
+			$CharacterBody3D.on_l_pressed()
 
 func _on_VolumeDownButton_pressed():
 	if is_playing:  # Adjust volume only if audio is playing
@@ -153,3 +148,15 @@ func toggle_camera():
 		$BlenderPopup.popup_centered()
 	else:
 		$BlenderPopup.hide()
+		
+func onKey3Pressed() -> void:
+	if $Camera3DSpeaker.current == false:
+			$Camera3DSpeaker.current = true
+			soundWindow.popup()
+			lightWindow.popup()
+			tempWindow.popup()
+	else:
+		$Camera3DSpeaker.current = false
+		soundWindow.hide()
+		lightWindow.hide()
+		tempWindow.hide()

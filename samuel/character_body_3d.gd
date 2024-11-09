@@ -14,10 +14,21 @@ var moveSamuelPopup : Popup
 var instructionCounter = 0
 var taskWindowLabel : Label
 var taskWindowPoint : Label
-var kitechenAudio : AudioStreamPlayer3D
+var goToLivingRoomAudio : AudioStreamPlayer3D
 var pointLabel: Label
 var gameTimerLabel: Label
 var dialogAudioPlayer: AudioStreamPlayer3D
+var panel2: Panel
+var panelChar: Sprite2D
+var node3D: Node3D
+
+var task1Label: Label
+var task2Label: Label
+var task3Label: Label
+var task4Label: Label
+var task5Label: Label
+var task6Label: Label
+var task7Label: Label
 
 var target_string: String
 var sayHelloTask: bool
@@ -58,12 +69,24 @@ func _ready():
 	# Connect the blender's "blender_turned_on" signal from BlenderPopup
 	var blender_node = get_node("/root/Node3D/BlenderPopup")  # Adjusted path to BlenderPopup
 	blender_node.connect("blender_turned_on", Callable(self, "_on_blender_turned_on"))
-	kitechenAudio = get_node("/root/Node3D/kitchen/AudioStreamKitchen")
+	goToLivingRoomAudio = get_node("/root/Node3D/kitchen/AudioStreamKitchen")
 	
 	pointLabel = $"../Camera3D/TaskWindow/Point"
 	gameTimerLabel = $"../Camera3D/TaskWindow/GameTimer"
 	dialogAudioPlayer = $"../Camera3D/TaskWindow/dialogAudioPlayer"
-
+	panel2 = $"../Dialog/Panel2"
+	panelChar = $"../Dialog/Panel2/SamuelPopUp"
+	
+	task1Label = $"../Camera3D/TaskWindow/Label1"
+	task2Label = $"../Camera3D/TaskWindow/Label2"
+	task3Label = $"../Camera3D/TaskWindow/Label3"
+	task4Label = $"../Camera3D/TaskWindow/Label4"
+	task5Label = $"../Camera3D/TaskWindow/Label5"
+	task6Label = $"../Camera3D/TaskWindow/Label6"
+	task7Label = $"../Camera3D/TaskWindow/Label7"
+	
+	node3D = $".."
+	
 func _process(delta: float) -> void:
 #func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_B):
@@ -82,7 +105,7 @@ func _process(delta: float) -> void:
 		moveSamuelButton.text += " x:" + str(instructionCounter)
 	elif sayHelloTask == true && moveToLivingRoomTask == false:
 		#print ("inside elif condition")
-		target_string = "Say: Go to kitchen"
+		target_string = "Say: Go to Living Room"
 		moveSamuelButton.text = target_string
 		moveSamuelButton.text += " x:" + str(instructionCounter)
 
@@ -241,27 +264,31 @@ func _on_button_pressed() -> void:
 		time = getElapsedTime()
 		print("elasped time: ", time , "Secs")
 		if(time.to_float() > 0.0 && time.to_float() <=2.0):
-			popupCoach()
+			popupCoach("One need to repeat the sentence three times face to face to Samuel and each sentence should have a 2 seconds gap in between so that Samuel can understand!!")
 			instructionCounter = instructionCounter- 1
 		if instructionCounter >=3:
 			print ("Hello Samuel Said by the user")
-			popupSamuel()
+			
 			instructionCounter = 0;
 			moveSamuelButton.text = ""
 			sayHelloTask = true
 			time = ""
+			task1Label.add_theme_color_override("font_color", Color(1, 0.5, 0))
+			popupSamuel("Hello There!!")
+			popupCoach("Task 1 is completed")
+			
 	
-	elif  target_string in "Say: Go to kitchen":
+	elif  target_string in "Say: Go to Living Room":
 		first_click_time == -1
-		kitechenAudio.play()
+		goToLivingRoomAudio.play()
 		time = getElapsedTime()
 		print("elasped time: ", time , "Secs")
 		if(time.to_float() > 0.0 && time.to_float() <=2.0):
-			popupCoach()
+			popupCoach("One need to repeat the sentence three times face to face to Samuel and each sentence should have a 2 seconds gap in between so that Samuel can understand!!")
 			instructionCounter = instructionCounter -1
 		if instructionCounter >=3:
 			#print("button pressed elif")
-			kitechenAudio.play()
+			goToLivingRoomAudio.play()
 			moveToLivingRoomTask = true
 			moveSamuelButton.hide()
 			$SamuelPopup/VBoxContainer.hide()
@@ -272,6 +299,9 @@ func _on_button_pressed() -> void:
 			moveToLivingRoomTask =true
 			moving_to_target = true
 			on_l_pressed()
+			task2Label.add_theme_color_override("font_color", Color(1, 0.5, 0))
+			popupCoach("Task 2 completed!")
+			node3D.onKey3Pressed()
 
 func handleTimer(delta)-> void :
 	if countdown_time > 0:
@@ -298,9 +328,20 @@ func getElapsedTime()-> String :
 		print("Time elapsed between clicks: ", elapsed_time, " seconds")	
 	return str(elapsed_time)
 		
-func popupCoach()-> void :
-	print("coach popup is called")	
+func popupCoach(dialog: String)-> void :
+	print("coach popup is called")
+	#panel2.full_text = "You need to speak 3 times. And each sentence should have a 2 sec gap in between so that Samuel can understand!!"
+	#panel2.startCoach("One need to repeat the sentence three times face to face to Samuel and each sentence should have a 2 seconds gap in between so that Samuel can understand!!")
+	panel2.startCoach(dialog)
+	var new_texture = load("res://coach.png")
+	panelChar.texture = new_texture
+		
 
-func popupSamuel()-> void:
-	print("Samuel popup is called")		
+func popupSamuel(dialog: String)-> void:
+	print("Samuel popup is called")	
+	#panel2.full_text = "Hello there!!!"
+	#panel2.startCoach("Hello there!!!")
+	panel2.startCoach(dialog)
+	var new_texture = load("res://SamuelPopUp.jpg")
+	panelChar.texture = new_texture	
 	

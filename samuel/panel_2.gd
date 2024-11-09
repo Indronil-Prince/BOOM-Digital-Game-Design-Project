@@ -58,10 +58,9 @@ func _process(delta):
 		position.y = lerp(target_y, initial_y, t)
 		
 	if Input.is_key_pressed(KEY_Q):
-		# Start moving up
-		print("Starting Move Up Timer")  # Debug print
-		move_up_timer.start()
-		panel.visible = true
+		startCoach("Show me this text. You pressed Q button")
+		
+		
 
 func _on_MoveUpTimer_timeout():
 	print("Move Up Timer Finished, starting Stay Timer")  # Debug print
@@ -90,3 +89,11 @@ func _on_typing_timer_timeout():
 		# Stop the typing animation once the full text is displayed
 		typing_timer.stop()
 		typing_timer.queue_free()  # Remove the timer after completion
+
+func startCoach(content: String) -> void :
+	# Start moving up
+	full_text = ""
+	full_text = content
+	print("Starting Move Up Timer")  # Debug print
+	move_up_timer.start()
+	panel.visible = true
