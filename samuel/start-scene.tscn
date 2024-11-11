@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckxsto54h52cb"]
+[gd_scene load_steps=9 format=3 uid="uid://ckxsto54h52cb"]
 
 [ext_resource type="Texture2D" uid="uid://3es7llsvcfyt" path="res://samuel-start.png" id="1_dy544"]
-[ext_resource type="Texture2D" uid="uid://cw7gj4731opv3" path="res://start_button.png" id="2_2tjd2"]
+[ext_resource type="Texture2D" uid="uid://xxdw7ibja0x8" path="res://start-button.png" id="2_srlyj"]
 [ext_resource type="Script" path="res://start_button.gd" id="3_grl2o"]
+[ext_resource type="Texture2D" uid="uid://da157s3a3x8rf" path="res://Tips-n-Coach.png" id="4_61qwn"]
+[ext_resource type="Texture2D" uid="uid://dfhvkl0qsh1ee" path="res://Objectives-button.png" id="5_8tywg"]
+[ext_resource type="Texture2D" uid="uid://3mukj4wax71g" path="res://Credtis.png" id="6_vafyu"]
+[ext_resource type="Texture2D" uid="uid://c6w28vqnu3vob" path="res://Settings.png" id="7_qnwrk"]
+[ext_resource type="Texture2D" uid="uid://c34d4y4kos033" path="res://more-button.png" id="8_a21wy"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -14,20 +19,77 @@ offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 layout_mode = 0
+offset_top = 18.0
 offset_right = 2982.0
-offset_bottom = 1557.0
+offset_bottom = 1575.0
 scale = Vector2(0.65, 0.65)
 texture = ExtResource("1_dy544")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="TextureButton" type="TextureButton" parent="Control"]
+[node name="startGameButton" type="TextureButton" parent="Control"]
 layout_mode = 0
-offset_left = 853.0
-offset_top = 774.0
-offset_right = 1050.0
-offset_bottom = 835.0
-texture_normal = ExtResource("2_2tjd2")
+offset_left = 934.0
+offset_top = 522.0
+offset_right = 1390.0
+offset_bottom = 966.0
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("2_srlyj")
 script = ExtResource("3_grl2o")
 
-[connection signal="pressed" from="Control/TextureButton" to="Control/TextureButton" method="_on_Button_pressed"]
+[node name="tipsButton" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 901.0
+offset_top = 598.0
+offset_right = 1325.0
+offset_bottom = 712.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("4_61qwn")
+
+[node name="objectiveButton" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 874.0
+offset_top = 673.0
+offset_right = 1344.0
+offset_bottom = 785.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("5_8tywg")
+stretch_mode = 0
+
+[node name="creditButton" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 848.0
+offset_top = 726.0
+offset_right = 1286.0
+offset_bottom = 844.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("6_vafyu")
+stretch_mode = 0
+
+[node name="settingsButton" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 812.0
+offset_top = 786.0
+offset_right = 1250.0
+offset_bottom = 898.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("7_qnwrk")
+stretch_mode = 0
+
+[node name="moreButton" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 774.0
+offset_top = 840.0
+offset_right = 1222.0
+offset_bottom = 954.0
+scale = Vector2(0.35, 0.35)
+texture_normal = ExtResource("8_a21wy")
+stretch_mode = 0
+
+[connection signal="pressed" from="Control/startGameButton" to="Control/startGameButton" method="_on_Button_pressed"]

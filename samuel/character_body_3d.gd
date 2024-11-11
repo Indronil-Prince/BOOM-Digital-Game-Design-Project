@@ -108,6 +108,13 @@ func _process(delta: float) -> void:
 		target_string = "Say: Go to Living Room"
 		moveSamuelButton.text = target_string
 		moveSamuelButton.text += " x:" + str(instructionCounter)
+	elif sayHelloTask == true && moveToLivingRoomTask == true &&	adjustLightMusicTempTask == true:
+		target_string = "Say: Go to Kitchen"
+		moveSamuelButton.text = target_string
+		moveSamuelButton.text += " x:" + str(instructionCounter)
+		moveSamuelButton.show()
+		$SamuelPopup/VBoxContainer.show()
+		$SamuelPopup.show()
 
 	# Main movement logic
 	if moving_to_target and not turning:
@@ -254,55 +261,8 @@ func stop_exclamation() -> void:
 		exclamation_sprite.visible = false
 
 func _on_button_pressed() -> void:
+	processTasks()
 	
-	instructionCounter+=1
-	#target_string = "Say: Hello Samuel!"
-	
-	if target_string in "Say: Hello Samuel!" :
-		
-		dialogAudioPlayer.play()
-		time = getElapsedTime()
-		print("elasped time: ", time , "Secs")
-		if(time.to_float() > 0.0 && time.to_float() <=2.0):
-			popupCoach("One need to repeat the sentence three times face to face to Samuel and each sentence should have a 2 seconds gap in between so that Samuel can understand!!")
-			instructionCounter = instructionCounter- 1
-		if instructionCounter >=3:
-			print ("Hello Samuel Said by the user")
-			
-			instructionCounter = 0;
-			moveSamuelButton.text = ""
-			sayHelloTask = true
-			time = ""
-			task1Label.add_theme_color_override("font_color", Color(1, 0.5, 0))
-			popupSamuel("Hello There!!")
-			popupCoach("Task 1 is completed")
-			
-	
-	elif  target_string in "Say: Go to Living Room":
-		first_click_time == -1
-		goToLivingRoomAudio.play()
-		time = getElapsedTime()
-		print("elasped time: ", time , "Secs")
-		if(time.to_float() > 0.0 && time.to_float() <=2.0):
-			popupCoach("One need to repeat the sentence three times face to face to Samuel and each sentence should have a 2 seconds gap in between so that Samuel can understand!!")
-			instructionCounter = instructionCounter -1
-		if instructionCounter >=3:
-			#print("button pressed elif")
-			goToLivingRoomAudio.play()
-			moveToLivingRoomTask = true
-			moveSamuelButton.hide()
-			$SamuelPopup/VBoxContainer.hide()
-			$SamuelPopup.hide()
-			instructionCounter = 0;
-			time = ""
-			
-			moveToLivingRoomTask =true
-			moving_to_target = true
-			on_l_pressed()
-			task2Label.add_theme_color_override("font_color", Color(1, 0.5, 0))
-			popupCoach("Task 2 completed!")
-			node3D.onKey3Pressed()
-
 func handleTimer(delta)-> void :
 	if countdown_time > 0:
 		countdown_time -= delta  # Subtract the delta time from the countdown
@@ -344,4 +304,56 @@ func popupSamuel(dialog: String)-> void:
 	panel2.startCoach(dialog)
 	var new_texture = load("res://SamuelPopUp.jpg")
 	panelChar.texture = new_texture	
+	
+func processTasks()-> void:
+	instructionCounter+=1
+	#target_string = "Say: Hello Samuel!"
+	
+	if target_string in "Say: Hello Samuel!" :
+		
+		dialogAudioPlayer.play()
+		time = getElapsedTime()
+		print("elasped time: ", time , "Secs")
+		if(time.to_float() > 0.0 && time.to_float() <=2.0):
+			popupCoach("One need to repeat the sentence three times face to face to Samuel and each sentence should have a 2 seconds gap in between so that Samuel can understand!!")
+			instructionCounter = instructionCounter- 1
+		if instructionCounter >=3:
+			print ("Hello Samuel Said by the user")
+			
+			instructionCounter = 0;
+			moveSamuelButton.text = ""
+			sayHelloTask = true
+			time = ""
+			task1Label.add_theme_color_override("font_color", Color(1, 0.5, 0))
+			#popupSamuel("Hello There!!")
+			popupCoach("Task 1 is completed! Samuel replied back 'Hello There!'. You've earned +200 Points! Please ask Samuel to move to the living room as a task#2.")
+			task1Label.text += " +200 Points"
+			
+	
+	elif  target_string in "Say: Go to Living Room":
+		first_click_time == -1
+		goToLivingRoomAudio.play()
+		time = getElapsedTime()
+		print("elasped time: ", time , "Secs")
+		if(time.to_float() > 0.0 && time.to_float() <=2.0):
+			popupCoach("One need to repeat the sentence three times face to face to Samuel and each sentence should have a 2 seconds gap in between so that Samuel can understand!!")
+			instructionCounter = instructionCounter -1
+		if instructionCounter >=3:
+			#print("button pressed elif")
+			goToLivingRoomAudio.play()
+			moveToLivingRoomTask = true
+			moveSamuelButton.hide()
+			$SamuelPopup/VBoxContainer.hide()
+			$SamuelPopup.hide()
+			instructionCounter = 0;
+			time = ""
+			moveToLivingRoomTask =true
+			moving_to_target = true
+			on_l_pressed()
+			task2Label.add_theme_color_override("font_color", Color(1, 0.5, 0))
+			popupCoach("Task 2 completed! You've earned +200 Points! Please set up light intesity, soothing room temperatue and suitable music for Samuel as a task#3!")
+			task2Label.text += " +200 Points"
+			node3D.onKey3Pressed()
+
+		
 	

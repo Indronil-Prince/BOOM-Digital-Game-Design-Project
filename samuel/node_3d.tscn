@@ -1448,10 +1448,10 @@ script = ExtResource("34_mnqtc")
 
 [node name="TaskWindow" type="Window" parent="Camera3D"]
 title = "Task List"
-position = Vector2i(1286, 36)
+position = Vector2i(1100, 36)
 size = Vector2i(800, 430)
 theme_override_fonts/title_font = ExtResource("55_ijr6n")
-theme_override_font_sizes/title_font_size = 20
+theme_override_font_sizes/title_font_size = 30
 script = ExtResource("37_cp7if")
 
 [node name="Label1" type="Label" parent="Camera3D/TaskWindow"]
@@ -1460,7 +1460,7 @@ offset_bottom = 23.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
 theme_override_fonts/font = ExtResource("55_ijr6n")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 30
 text = "1. Get introduced to Samuel. Say 'Hello Samuel' "
 
 [node name="Label2" type="Label" parent="Camera3D/TaskWindow"]
@@ -1468,7 +1468,7 @@ offset_top = 25.0
 offset_right = 265.0
 offset_bottom = 48.0
 theme_override_fonts/font = ExtResource("55_ijr6n")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 30
 text = "2. Move Samuel to the living Room."
 
 [node name="Label3" type="Label" parent="Camera3D/TaskWindow"]
@@ -1476,23 +1476,23 @@ offset_top = 50.0
 offset_right = 350.0
 offset_bottom = 73.0
 theme_override_fonts/font = ExtResource("55_ijr6n")
-theme_override_font_sizes/font_size = 20
-text = "3. Setup light, music and room temperature suitable for Samuel."
+theme_override_font_sizes/font_size = 28
+text = "3. Setup light, music and  thermostat suitable for Samuel."
 
 [node name="Label4" type="Label" parent="Camera3D/TaskWindow"]
 offset_top = 75.0
 offset_right = 175.0
 offset_bottom = 98.0
 theme_override_fonts/font = ExtResource("55_ijr6n")
-theme_override_font_sizes/font_size = 20
-text = "4. Comb Samuel’s hair "
+theme_override_font_sizes/font_size = 30
+text = "4. Move Samuel to Kitchen."
 
 [node name="Label5" type="Label" parent="Camera3D/TaskWindow"]
 offset_top = 100.0
 offset_right = 284.0
 offset_bottom = 123.0
 theme_override_fonts/font = ExtResource("55_ijr6n")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 30
 text = "5. Prepare a glass of juice for Samuel"
 
 [node name="Label6" type="Label" parent="Camera3D/TaskWindow"]
@@ -1500,7 +1500,7 @@ offset_top = 125.0
 offset_right = 337.0
 offset_bottom = 148.0
 theme_override_fonts/font = ExtResource("55_ijr6n")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 30
 text = "6. Provide Samuel with food from the fridge"
 
 [node name="Label7" type="Label" parent="Camera3D/TaskWindow"]
@@ -1508,7 +1508,7 @@ offset_top = 150.0
 offset_right = 212.0
 offset_bottom = 173.0
 theme_override_fonts/font = ExtResource("55_ijr6n")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 30
 text = "7. Vacuums clean the space"
 
 [node name="LabelPoint" type="Label" parent="Camera3D/TaskWindow"]

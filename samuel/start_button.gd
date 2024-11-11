@@ -1,9 +1,14 @@
 extends TextureButton
 
 var Tex: TextureRect
-var TexButton: TextureButton
+var startGameButton: TextureButton
+var tipsButton: TextureButton
+var objectiveButton: TextureButton
+var creditButton: TextureButton
+var settingsButton: TextureButton
+var moreButton: TextureButton
 var timer: Timer
-var panel2
+#var panel2
  
 func _ready():
 	# Initialize TextureRect
@@ -17,14 +22,24 @@ func _ready():
 
 func _process(delta) -> void:
 	#panel2.visible = true
-	pass
+	startGameButton = $"."
+	tipsButton =$"../tipsButton"
+	objectiveButton = $"../objectiveButton"
+	creditButton = $"../creditButton"
+	settingsButton = $"../settingsButton"
+	moreButton =$"../moreButton"
 	
 func _on_Button_pressed():
 	Tex.texture = load("res://splash-screen1.png")  
 	# Load and show the image
 	timer.start()  # Start the timer
-	TexButton = get_node("/root/Node2D/Control/TextureButton")
-	TexButton.visible = false
+	#startGameButton = get_node("/root/Node2D/Control/startGameButton")
+	startGameButton.visible = false
+	tipsButton.visible = false
+	objectiveButton.visible = false
+	creditButton.visible = false
+	settingsButton.visible = false
+	moreButton.visible = false
 
 func _on_Timer_timeout():
 	get_tree().change_scene_to_file("res://node_3d.tscn")
