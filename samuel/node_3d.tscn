@@ -1501,7 +1501,7 @@ script = ExtResource("34_mnqtc")
 
 [node name="TaskWindow" type="Window" parent="Camera3D"]
 title = "Task List"
-position = Vector2i(1100, 36)
+position = Vector2i(814, 36)
 size = Vector2i(800, 430)
 theme_override_fonts/title_font = ExtResource("55_ijr6n")
 theme_override_font_sizes/title_font_size = 30
@@ -2098,7 +2098,7 @@ transform = Transform3D(0.943613, 0.32705, 0.0513076, -0.327482, 0.944857, 0, -0
 
 [node name="SamuelPopup" type="Popup" parent="CharacterBody3D"]
 title = "Instruction"
-position = Vector2i(1286, 320)
+position = Vector2i(1214, 320)
 size = Vector2i(400, 100)
 visible = true
 unresizable = false
@@ -2118,10 +2118,13 @@ text = "ABCD"
 [node name="BedRoomPosition" type="Node3D" parent="CharacterBody3D"]
 
 [node name="ExclamationSprite" type="Sprite3D" parent="CharacterBody3D"]
-transform = Transform3D(0.00906094, 0, 0.0744507, 0, 0.075, 0, -0.0744507, 0, 0.00906094, 0, 1.74689, 0)
+transform = Transform3D(-3.27835e-09, 0, 0.075, 0, 0.075, 0, -0.075, 0, -3.27835e-09, 0.5, 1.5, 0.5)
 visible = false
 texture = ExtResource("62_efynk")
 hframes = 3
+frame = 2
+region_enabled = true
+region_rect = Rect2(-1535.26, -2.572, 2445.51, 901.563)
 
 [node name="ExclamationAnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D/ExclamationSprite"]
 libraries = {

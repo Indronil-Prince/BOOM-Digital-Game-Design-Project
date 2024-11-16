@@ -8,6 +8,9 @@ extends CharacterBody3D
 @onready var bedroom_position = $BedRoomPosition.global_transform.origin  # Bedroom position
 @onready var animation_player = $Happy_Walk/Walking_Animation
 @onready var exclamation_sprite = $ExclamationSprite  # Reference to the exclamation sprite
+@onready var exclamAnimPlayer = $ExclamationSprite/ExclamationAnimationPlayer
+
+const  TIME_THRESHOLD = 30
 
 var moveSamuelButton : Button
 var moveSamuelPopup : Popup
@@ -255,10 +258,12 @@ func stop_walking_animation() -> void:
 func show_exclamation() -> void:
 	if exclamation_sprite:
 		exclamation_sprite.visible = true
-
+		exclamAnimPlayer.play()
+		
 func stop_exclamation() -> void:
 	if exclamation_sprite:
 		exclamation_sprite.visible = false
+		exclamAnimPlayer.stop()
 
 func _on_button_pressed() -> void:
 	processTasks()
@@ -351,17 +356,34 @@ func processTasks()-> void:
 			moving_to_target = true
 			on_l_pressed()
 			task2Label.add_theme_color_override("font_color", Color(1, 0.5, 0))
-			popupCoach("Task 2 completed! You've earned +200 Points! Please set up light intesity, soothing room temperatue and suitable music for Samuel as a task#3!")
+			popupCoach("Task 2 completed! You've earned +200 Points! Please set up light intesity, soothing room temperatue and suitable music for Samuel as a task#3 in 30 seconds")
 			task2Label.text += " +200 Points"
 			node3D.onKey3Pressed()
+			startTask3Timer()
 			
 			
-			#var timer: Timer
-			#timer = Timer.new()
-			#timer.wait_time = 2  # Set timer to wait for 5 seconds
-			#timer.one_shot = true  # The timer will stop after triggering once
-			#add_child(timer)
-			#timer.connect("timeout", Callable(self, "_on_Timer_timeout"))  # Connect timeout signal to a function
-
+			
+func startTask3Timer() ->void:
+	var timer = Timer.new()
+	timer.wait_time = TIME_THRESHOLD  # Set the timer to 30 seconds
+	timer.one_shot = true  # Ensure the timer triggers only once
+	add_child(timer)  # Add the Timer node to the scene
+	#timer.connect("timeout", self, "_on_task3_timer_timeout")  # Connect the timeout signal
+	timer.connect("timeout", Callable(self, "_on_task3_timer_timeout"))
+	timer.start()  # Start the timer	
+	
+func _on_task3_timer_timeout() -> void:
+	print("_on_task3_timer_timeout")
+	if node3D.checkTemperature() && node3D.checkLight()  and node3D.checkSound():
+		popupCoach("Task3 is completed. +200 Points. Please move Samuel to the kitchen for Task#4")
+		task3Label.text += " +200 Points"
+		task3Label.add_theme_color_override("font_color", Color(1, 0.5, 0))
+		adjustLightMusicTempTask = true
+		#print("Task3 is completed")
+	else:
+		popupSamuel("I am struggling with temperature /light Intesity / Sound. Plase adjust! And I am moving back to my room")
+		show_exclamation()
+		on_c_pressed()
 		
+	 
 	

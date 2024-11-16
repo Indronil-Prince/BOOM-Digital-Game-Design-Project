@@ -68,7 +68,7 @@ func _on_MoveUpTimer_timeout():
 	# Ensure position reaches target exactly and start the StayTimer
 	position.y = target_y
 	stay_timer.start()  # Start the stay period
-	start_typing_animation()  # Start typing effect during upward movement
+	#start_typing_animation()  # Start typing effect during upward movement
 
 func _on_StayTimer_timeout():
 	print("Stay Timer Finished, starting Move Down Timer")  # Debug print
@@ -102,10 +102,10 @@ func startCoach(content: String) -> void :
 	text_label.text = full_text       # Directly display the full text without animation
 	
 	# Optionally clear any timers if they were previously used
-	if typing_timer !=null and typing_timer and typing_timer.is_inside_tree():
-		typing_timer.stop()
-		typing_timer.queue_free()
-		typing_timer = null
+	#if typing_timer !=null and typing_timer and typing_timer.is_inside_tree():
+		#typing_timer.stop()
+		#typing_timer.queue_free()
+		#typing_timer = null
 	
 	# Start the upward movement and make panel visible
 	move_up_timer.start()

@@ -110,7 +110,7 @@ func _on_PlayButton_pressed():
 		else:
 			exc.visible = true
 			exclamAnimPlayer.play("Exclamation_Left")
-			#exc.rotate_y(deg_to_rad(90))
+			exc.rotate_y(deg_to_rad(90))
 			$CharacterBody3D.on_c_pressed()
 		
 func _on_VolumeUpButton_pressed():
@@ -238,6 +238,12 @@ func checkLight() -> bool:
 		lightIsOk = false
 		lightSingnifierLabel.modulate  = Color(1, 0, 0)
 	return lightIsOk
+	
+func checkTemperature() -> bool:
+	if roomTemp <= 70 and roomTemp > 50:
+		return true
+	return false
+	
 		
 		
 	
