@@ -4,7 +4,8 @@ extends Control  # Adjust to the base node type if needed
 var target_y := 550  # Set the destination y position (y2)
 var initial_y := 0  # Starting y position (y1)
 var duration := 2.0  # Duration for moving up and down
-
+var stay_duration := 10.0
+ 
 # Movement variables
 var velocity: float = 0.0  # Movement speed (calculated)
 var moving_up: bool = true  # Whether we're moving up or down
@@ -92,8 +93,20 @@ func _on_typing_timer_timeout():
 
 func startCoach(content: String) -> void :
 	# Start moving up
-	full_text = ""
-	full_text = content
-	print("Starting Move Up Timer")  # Debug print
+	#full_text = ""
+	#full_text = content
+	#print("Starting Move Up Timer")  # Debug print
+	#move_up_timer.start()
+	#panel.visible = true
+	full_text = content               # Set the new content for the text display
+	text_label.text = full_text       # Directly display the full text without animation
+	
+	# Optionally clear any timers if they were previously used
+	if typing_timer !=null and typing_timer and typing_timer.is_inside_tree():
+		typing_timer.stop()
+		typing_timer.queue_free()
+		typing_timer = null
+	
+	# Start the upward movement and make panel visible
 	move_up_timer.start()
 	panel.visible = true

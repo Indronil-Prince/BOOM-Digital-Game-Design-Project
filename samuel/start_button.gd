@@ -15,7 +15,7 @@ func _ready():
 	Tex = get_node("/root/Node2D/Control/TextureRect")
 	# Setup a timer
 	timer = Timer.new()
-	timer.wait_time = 10  # Set timer to wait for 5 seconds
+	timer.wait_time = 2  # Set timer to wait for 5 seconds
 	timer.one_shot = true  # The timer will stop after triggering once
 	add_child(timer)
 	timer.connect("timeout", Callable(self, "_on_Timer_timeout"))  # Connect timeout signal to a function

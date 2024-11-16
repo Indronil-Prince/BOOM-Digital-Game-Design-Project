@@ -354,6 +354,14 @@ func processTasks()-> void:
 			popupCoach("Task 2 completed! You've earned +200 Points! Please set up light intesity, soothing room temperatue and suitable music for Samuel as a task#3!")
 			task2Label.text += " +200 Points"
 			node3D.onKey3Pressed()
+			
+			
+			#var timer: Timer
+			#timer = Timer.new()
+			#timer.wait_time = 2  # Set timer to wait for 5 seconds
+			#timer.one_shot = true  # The timer will stop after triggering once
+			#add_child(timer)
+			#timer.connect("timeout", Callable(self, "_on_Timer_timeout"))  # Connect timeout signal to a function
 
 		
 	

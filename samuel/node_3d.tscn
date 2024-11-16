@@ -1354,6 +1354,14 @@ offset_right = 243.0
 offset_bottom = 121.0
 text = "Volume Down"
 
+[node name="SoundSignifierLabel" type="Label" parent="living/MeshInstance3D/BassSpeakers12/Window/Popup"]
+offset_left = 135.0
+offset_top = 107.0
+offset_right = 175.0
+offset_bottom = 130.0
+scale = Vector2(1.5, 1.5)
+text = "DB"
+
 [node name="OmniLight3D" parent="living" instance=ExtResource("13_gaocx")]
 transform = Transform3D(-0.0479541, -0.0328701, 0.998309, -0.997376, -0.0526952, -0.0496443, 0.0542379, -0.99807, -0.0302569, 4.0612, 4.03259, 1.2275)
 light_energy = 5.848

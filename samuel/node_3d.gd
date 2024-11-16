@@ -20,6 +20,7 @@ var light : OmniLight3D
 var temp: TextureButton
 var panel: Panel
 var exc: Sprite3D
+var soundSignifierLabel: Label
 
 
 
@@ -35,6 +36,9 @@ func _ready():
 	# Ensure the entire scene is visible
 	self.show()
 	print("Scene is running")
+	
+	
+	
 	# Initialize the array with camera nodes
 	cameras = [$Camera3D, $Camera3D2]
 	# Set the initial active camera
@@ -57,7 +61,13 @@ func _ready():
 	tempReading = $living/MeshInstance3D/Thermostat/TempWindow/TempPopup/TempReading
 	panel = $Dialog/Panel2
 	exc = $CharacterBody3D/ExclamationSprite
-
+	soundSignifierLabel = $living/MeshInstance3D/BassSpeakers12/Window/Popup/SoundSignifierLabel
+	
+	audio.volume_db = 24
+	soundSignifierLabel.text = str (audio.volume_db)
+	soundSignifierLabel.modulate  = Color(1, 0, 0)
+	
+	
 func set_children_visibility(node, visibility):
 	for child in node.get_children():
 		if child is MeshInstance3D:
@@ -65,6 +75,7 @@ func set_children_visibility(node, visibility):
 		set_children_visibility(child, visibility)
 		
 func _process(delta: float) -> void:
+	
 	checkTemp()
 	if Input.is_key_pressed(KEY_Z):
 		toggle_camera()
@@ -79,35 +90,49 @@ func _on_PlayButton_pressed():
 		audio.stop()
 		is_playing = false  # Update the state to reflect that audio is stopped
 		playLabel.text = "Play Music"
+		
+		
+		
 	else:
 		audio.play()
 		is_playing = true
 		playLabel.text = "Stop Music"
-		exc.visible = true
-		exc.rotate_y(deg_to_rad(90))
-		$CharacterBody3D.on_c_pressed()
+		
+		if checkSound() == true:
+			pass
+		else:
+			exc.visible = true
+			exc.rotate_y(deg_to_rad(90))
+			$CharacterBody3D.on_c_pressed()
+		
 func _on_VolumeUpButton_pressed():
-	if is_playing:  # Adjust volume only if audio is playing
-		audio.volume_db += volume_step
-		if audio.volume_db > 24:  # Optionally cap the volume to 0 dB
-			audio.volume_db = 24
-		if audio.volume_db < -10:
-			#lightWindow.popup()
-			#tempWindow.popup()
-			exc.visible = false
-			print("Sound is good now!")
-			$CharacterBody3D.on_l_pressed()
+	#if is_playing:  # Adjust volume only if audio is playing
+	audio.volume_db += volume_step
+	soundSignifierLabel.text = str (audio.volume_db)
+	
+	if audio.volume_db > 24:  # Optionally cap the volume to 0 dB
+		audio.volume_db = 24
+	
+	
+	
+	
+	if checkSound() == true:
+		exc.visible = false
+		print("Sound is good now!")
+		$CharacterBody3D.on_l_pressed()
+
 
 func _on_VolumeDownButton_pressed():
-	if is_playing:  # Adjust volume only if audio is playing
-		audio.volume_db -= volume_step
-		if audio.volume_db < -40:  # Optionally cap the minimum volume to -40 dB
-			audio.volume_db = -40
-		if audio.volume_db < -10:
-			#lightWindow.popup()
-			#tempWindow.popup()
-			exc.visible = false
-			print("Sound is good now!")
+	#if is_playing:  # Adjust volume only if audio is playing
+	audio.volume_db -= volume_step
+	soundSignifierLabel.text = str (audio.volume_db)
+	
+	if audio.volume_db < -40:  # Optionally cap the minimum volume to -40 dB
+		audio.volume_db = -40
+	if checkSound() == true:
+		exc.visible = false
+		print("Sound is good now!")
+		$CharacterBody3D.on_l_pressed()
 			
 func _on_LightUpButton_pressed():
 	light.light_energy += intensity_step
@@ -160,3 +185,16 @@ func onKey3Pressed() -> void:
 		soundWindow.hide()
 		lightWindow.hide()
 		tempWindow.hide()
+
+func checkSound() -> bool:
+	#print("Inside checkSound")
+	var soundIsOk = false
+	if  audio.volume_db < -10:
+		soundSignifierLabel.modulate  = Color(0, 1, 0)
+		soundIsOk = true
+	else:
+		soundIsOk = false
+		soundSignifierLabel.modulate  = Color(1, 0, 0)
+	return soundIsOk
+		
+	
