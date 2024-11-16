@@ -21,6 +21,7 @@ var light : OmniLight3D
 var temp: TextureButton
 var panel: Panel
 var exc: Sprite3D
+var exclamAnimPlayer: AnimationPlayer
 var soundSignifierLabel: Label
 var lightSingnifierLabel: Label
 
@@ -63,6 +64,7 @@ func _ready():
 	tempReading = $living/MeshInstance3D/Thermostat/TempWindow/TempPopup/TempReading
 	panel = $Dialog/Panel2
 	exc = $CharacterBody3D/ExclamationSprite
+	exclamAnimPlayer = $CharacterBody3D/ExclamationSprite/ExclamationAnimationPlayer
 	soundSignifierLabel = $living/MeshInstance3D/BassSpeakers12/Window/Popup/SoundSignifierLabel
 	lightSingnifierLabel = $living/MeshInstance3D/LightMeter/LightWindow/LightPopup/lightSignifierLabel
 	lightPlayButton = $living/MeshInstance3D/LightMeter/LightWindow/LightPopup/LightPlayButton
@@ -107,7 +109,8 @@ func _on_PlayButton_pressed():
 			pass
 		else:
 			exc.visible = true
-			exc.rotate_y(deg_to_rad(90))
+			exclamAnimPlayer.play("Exclamation_Left")
+			#exc.rotate_y(deg_to_rad(90))
 			$CharacterBody3D.on_c_pressed()
 		
 func _on_VolumeUpButton_pressed():
