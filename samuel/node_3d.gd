@@ -11,6 +11,7 @@ var playLabel: Label
 var audio: AudioStreamPlayer
 var volume_up_button : TextureButton
 var volume_down_button: TextureButton
+var lightPlayButton: TextureButton
 var light_up_button : TextureButton 
 var light_down_button : TextureButton 
 var temp_up_button : TextureButton 
@@ -21,6 +22,7 @@ var temp: TextureButton
 var panel: Panel
 var exc: Sprite3D
 var soundSignifierLabel: Label
+var lightSingnifierLabel: Label
 
 
 
@@ -62,6 +64,12 @@ func _ready():
 	panel = $Dialog/Panel2
 	exc = $CharacterBody3D/ExclamationSprite
 	soundSignifierLabel = $living/MeshInstance3D/BassSpeakers12/Window/Popup/SoundSignifierLabel
+	lightSingnifierLabel = $living/MeshInstance3D/LightMeter/LightWindow/LightPopup/lightSignifierLabel
+	lightPlayButton = $living/MeshInstance3D/LightMeter/LightWindow/LightPopup/LightPlayButton
+	
+	var trimmedValue: String = "%0.2f" % light.light_energy
+	lightSingnifierLabel.text = str(trimmedValue)
+	lightSingnifierLabel.modulate = Color(1, 0, 0)
 	
 	audio.volume_db = 24
 	soundSignifierLabel.text = str (audio.volume_db)
@@ -90,9 +98,6 @@ func _on_PlayButton_pressed():
 		audio.stop()
 		is_playing = false  # Update the state to reflect that audio is stopped
 		playLabel.text = "Play Music"
-		
-		
-		
 	else:
 		audio.play()
 		is_playing = true
@@ -112,9 +117,6 @@ func _on_VolumeUpButton_pressed():
 	
 	if audio.volume_db > 24:  # Optionally cap the volume to 0 dB
 		audio.volume_db = 24
-	
-	
-	
 	
 	if checkSound() == true:
 		exc.visible = false
@@ -136,9 +138,31 @@ func _on_VolumeDownButton_pressed():
 			
 func _on_LightUpButton_pressed():
 	light.light_energy += intensity_step
+	var trimmedValue: String = "%0.2f" % light.light_energy
+	lightSingnifierLabel.text = str(trimmedValue)
+	#lightSingnifierLabel.text = str(light.light_energy)
+	if checkLight() == true:
+		pass
+	else:
+		pass
+		#exc.visible = true
+		#exc.rotate_y(deg_to_rad(90))
+		#$CharacterBody3D.on_c_pressed()
+		
 
 func _on_LightDownButton_pressed():
 	light.light_energy -= intensity_step
+	var trimmedValue: String = "%0.2f" % light.light_energy
+	lightSingnifierLabel.text = str(trimmedValue)
+	#lightSingnifierLabel.text = str(light.light_energy)
+	if checkLight() == true:
+		pass
+	else:
+		pass
+		#exc.visible = true
+		#exc.rotate_y(deg_to_rad(90))
+		#$CharacterBody3D.on_c_pressed()
+	
 	
 func checkTemp():
 	if roomTemp > 120:
@@ -196,5 +220,21 @@ func checkSound() -> bool:
 		soundIsOk = false
 		soundSignifierLabel.modulate  = Color(1, 0, 0)
 	return soundIsOk
+	
+func checkLight() -> bool:
+	
+	var lightIsOk = false
+	if  light.light_energy < 1:
+		var green_texture:Texture2D  = preload("res://green_light.png")
+		lightPlayButton.texture_normal = green_texture
+		lightSingnifierLabel.modulate  = Color(0, 1, 0)
+		lightIsOk = true
+	else:
+		var yellow_texture:Texture2D = preload("res://light.png") as Texture2D
+		lightPlayButton.texture_normal = yellow_texture
+		lightIsOk = false
+		lightSingnifierLabel.modulate  = Color(1, 0, 0)
+	return lightIsOk
+		
 		
 	
