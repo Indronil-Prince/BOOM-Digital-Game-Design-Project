@@ -1,0 +1,243 @@
+[gd_scene load_steps=7 format=3 uid="uid://l42d112gcxg8"]
+
+[ext_resource type="Script" path="res://tips_coach_page.gd" id="1_02um8"]
+[ext_resource type="Texture2D" uid="uid://bxyogudl8cmcn" path="res://Guidance.png" id="2_elhi0"]
+[ext_resource type="Texture2D" uid="uid://bgt334qqf0sp5" path="res://BackHome-button.png" id="2_gd7j0"]
+[ext_resource type="FontFile" uid="uid://cvb8m6huv00vy" path="res://ARCADE.TTF" id="2_hwr6h"]
+[ext_resource type="Texture2D" uid="uid://bfp3kwmwn20u8" path="res://Arrow-button.png" id="4_lu3nf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2a6m"]
+bg_color = Color(0.960784, 0.909804, 0.827451, 0.705882)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[node name="TipsCoachPage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1900.0
+offset_bottom = -968.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_02um8")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 1889.0
+offset_bottom = 1103.0
+texture = ExtResource("2_elhi0")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 181.0
+offset_right = 1653.0
+offset_bottom = 955.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_d2a6m")
+
+[node name="Task1" type="Label" parent="."]
+custom_minimum_size = Vector2(600, 800)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 275.0
+offset_top = 188.0
+offset_right = 1653.0
+offset_bottom = 988.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.172549, 0.101961, 0.0705882, 1)
+theme_override_colors/font_shadow_color = Color(0.847059, 0.760784, 0.682353, 1)
+theme_override_colors/font_outline_color = Color(0.541176, 0.309804, 0.196078, 1)
+theme_override_fonts/font = ExtResource("2_hwr6h")
+theme_override_font_sizes/font_size = 40
+text = "Task 1: Shake Hand and Get Introduced to Samuel
+Tip: Approach Samuel with care and patience.
+
+Start Slowly: You’re in Samuel’s room. Speak slowly, with sentences of 3 words or fewer. Repeat your request to him 3 times.
+Avoid Agitation: If you speak too fast or use long sentences, Samuel may get upset. After two consecutive upsets without a 30-second cool-off, he could become more agitated and cry. Crying requires a 60-second cool-off.
+Initiate the Handshake: Say “Let’s Handshake” 3 times slowly, then extend your hand for Samuel to shake.
+Face Samuel: Speak to Samuel directly, staying within 20 degrees of his face, or he won’t respond.
+Clues: If Samuel becomes agitated or cries, look for a clue icon for guidance.
+Endgame Insight: If you shake his hand without saying “Let’s Handshake,” Samuel may feel overstimulated, indicated by a vibration in the controller."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Task2" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(600, 800)
+layout_mode = 2
+offset_left = 363.0
+offset_top = 165.0
+offset_right = 1563.0
+offset_bottom = 965.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.172549, 0.101961, 0.0705882, 1)
+theme_override_colors/font_shadow_color = Color(0.847059, 0.760784, 0.682353, 1)
+theme_override_colors/font_outline_color = Color(0.541176, 0.309804, 0.196078, 1)
+theme_override_fonts/font = ExtResource("2_hwr6h")
+theme_override_font_sizes/font_size = 50
+text = "Task 2: Move Samuel to the Living Room
+Tip: Guide Samuel to the living room with patience.
+
+Slow, Face-to-Face Instructions: Tell Samuel to go to the living room.
+Repeat 3 Times: Repeat the instruction 3 times slowly, facing him directly.
+Pause Between Instructions: Leave a 2-second gap between each instruction to give him time to process."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Task3" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(600, 800)
+layout_mode = 2
+offset_left = 324.0
+offset_top = 165.0
+offset_right = 1524.0
+offset_bottom = 965.0
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.172549, 0.101961, 0.0705882, 1)
+theme_override_colors/font_shadow_color = Color(0.847059, 0.760784, 0.682353, 1)
+theme_override_colors/font_outline_color = Color(0.541176, 0.309804, 0.196078, 1)
+theme_override_fonts/font = ExtResource("2_hwr6h")
+theme_override_font_sizes/font_size = 40
+text = "Task 3: Set Up Light, Temperature, and Sound for Samuel
+Tip: Create a soothing environment for Samuel.
+
+Light Control: Turn on the light within 15 seconds, or Samuel will leave the room.
+Dim the Light: Samuel is sensitive to bright lights. Lower the brightness to mid-low within 30 seconds to prevent him from getting agitated and leaving.
+Warmth: Samuel prefers a cozy, warm environment.
+Turn on the heater within 60 seconds and set the temperature to 72–76°F. Too high or low will agitate him within 30 seconds.
+Watch for blue or yellow indicators around Samuel to show if he’s uncomfortable with the temperature.
+Endgame Insight: At the end, a bright display and a yellow/blue room shade will reflect Samuel’s perception if the lighting or temperature was unsuitable."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Task4" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(600, 800)
+layout_mode = 2
+offset_left = 324.0
+offset_top = 165.0
+offset_right = 1524.0
+offset_bottom = 965.0
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.172549, 0.101961, 0.0705882, 1)
+theme_override_colors/font_shadow_color = Color(0.847059, 0.760784, 0.682353, 1)
+theme_override_colors/font_outline_color = Color(0.541176, 0.309804, 0.196078, 1)
+theme_override_fonts/font = ExtResource("2_hwr6h")
+theme_override_font_sizes/font_size = 40
+text = "Task 4: Move Samuel to the Kitchen
+Tip: Guide Samuel to the kitchen with patience.
+
+Slow, Face-to-Face Instructions: Tell Samuel to go to the kitchen.
+Repeat 3 Times: Repeat the instruction 3 times slowly, facing him directly.
+Pause Between Instructions: Leave a 2-second gap between each instruction to give him time to process."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Task5" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(600, 800)
+layout_mode = 2
+offset_left = 324.0
+offset_top = 165.0
+offset_right = 1524.0
+offset_bottom = 965.0
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.172549, 0.101961, 0.0705882, 1)
+theme_override_colors/font_shadow_color = Color(0.847059, 0.760784, 0.682353, 1)
+theme_override_colors/font_outline_color = Color(0.541176, 0.309804, 0.196078, 1)
+theme_override_fonts/font = ExtResource("2_hwr6h")
+theme_override_font_sizes/font_size = 40
+text = "Task 5: Prepare a Glass of Juice for Samuel
+Tip: Keep Samuel informed and entertained safely.
+
+Announce the Blender: Before starting, let Samuel know you’re “starting the blender”.
+Repeat this 3 times slowly, directly facing Samuel within a 20-degree angle. Otherwise, he might get upset and leave the room.
+Use the Right Cup: Samuel finds glass breaking entertaining. Serve the juice in his designated plastic cup; otherwise, he’ll break it.
+Endgame Insight: If the wrong cup is used, you’ll see surprised faces as Samuel views this as play. The blender sound will also be amplified to reflect how he perceives it."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Task6" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(600, 800)
+layout_mode = 2
+offset_left = 324.0
+offset_top = 165.0
+offset_right = 1524.0
+offset_bottom = 965.0
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.172549, 0.101961, 0.0705882, 1)
+theme_override_colors/font_shadow_color = Color(0.847059, 0.760784, 0.682353, 1)
+theme_override_colors/font_outline_color = Color(0.541176, 0.309804, 0.196078, 1)
+theme_override_fonts/font = ExtResource("2_hwr6h")
+theme_override_font_sizes/font_size = 40
+text = "Task 6: Provide Samuel with Food from the Fridge
+Tip: Use color-coded utensils to help Samuel recognize his food.
+
+Color-Coded Plate: Samuel recognizes his food by the blue color-coded plate. Make sure his food is served on the blue plate so he knows it’s meant for him.
+Avoid Mismatches: If the food isn’t on the correct plate, Samuel may not understand it’s for him."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Task7" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(600, 800)
+layout_mode = 2
+offset_left = 324.0
+offset_top = 165.0
+offset_right = 1524.0
+offset_bottom = 965.0
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.172549, 0.101961, 0.0705882, 1)
+theme_override_colors/font_shadow_color = Color(0.847059, 0.760784, 0.682353, 1)
+theme_override_colors/font_outline_color = Color(0.541176, 0.309804, 0.196078, 1)
+theme_override_fonts/font = ExtResource("2_hwr6h")
+theme_override_font_sizes/font_size = 40
+text = "Task 7: Vacuum Clean the Space
+Tip: Give Samuel a heads-up before vacuuming.
+
+Announce the Vacuuming: Tell Samuel that the space is about to be vacuumed.
+Repeat 3 Times: Repeat this 3 times slowly, facing him directly.
+Pause Between Announcements: Leave a 2-second gap between each announcement to allow him to adjust.
+"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="PreviousButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1764.0
+offset_top = 967.0
+offset_right = 1844.0
+offset_bottom = 1047.0
+grow_vertical = 0
+rotation = -3.14159
+texture_normal = ExtResource("4_lu3nf")
+
+[node name="NextButton" type="TextureButton" parent="."]
+layout_mode = 1
+offset_left = 1788.0
+offset_top = 884.0
+offset_right = 1874.0
+offset_bottom = 970.0
+texture_normal = ExtResource("4_lu3nf")
+
+[node name="BackToHomeButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("2_gd7j0")
+
+[connection signal="pressed" from="PreviousButton" to="." method="_on_PreviousButton_pressed"]
+[connection signal="pressed" from="NextButton" to="." method="_on_NextButton_pressed"]
+[connection signal="pressed" from="BackToHomeButton" to="." method="_on_BackToHomeButton_pressed"]

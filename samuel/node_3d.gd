@@ -123,6 +123,7 @@ func _on_VolumeUpButton_pressed():
 	
 	if checkSound() == true:
 		exc.visible = false
+		exclamAnimPlayer.stop()
 		print("Sound is good now!")
 		$CharacterBody3D.on_l_pressed()
 

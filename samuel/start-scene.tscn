@@ -93,3 +93,6 @@ texture_normal = ExtResource("8_a21wy")
 stretch_mode = 0
 
 [connection signal="pressed" from="Control/startGameButton" to="Control/startGameButton" method="_on_Button_pressed"]
+[connection signal="pressed" from="Control/tipsButton" to="Control/startGameButton" method="_on_tipsCoachButton_pressed"]
+[connection signal="pressed" from="Control/objectiveButton" to="Control/startGameButton" method="_on_objectiveButton_pressed"]
+[connection signal="pressed" from="Control/creditButton" to="Control/startGameButton" method="_on_creditButton_pressed"]

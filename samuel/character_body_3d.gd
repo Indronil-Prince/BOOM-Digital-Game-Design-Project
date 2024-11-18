@@ -10,7 +10,7 @@ extends CharacterBody3D
 @onready var exclamation_sprite = $ExclamationSprite  # Reference to the exclamation sprite
 @onready var exclamAnimPlayer = $ExclamationSprite/ExclamationAnimationPlayer
 
-const  TIME_THRESHOLD = 30
+const  TIME_THRESHOLD = 20
 
 var moveSamuelButton : Button
 var moveSamuelPopup : Popup
@@ -37,6 +37,7 @@ var target_string: String
 var sayHelloTask: bool
 var moveToLivingRoomTask: bool
 var adjustLightMusicTempTask: bool
+var moveToKitchenTask: bool
 var blenderTask: bool
 var vaccuamCleanTask: bool
 var foodTask: bool
@@ -58,6 +59,7 @@ func _ready():
 	blenderTask = false
 	vaccuamCleanTask = false
 	foodTask = false 	
+	moveToKitchenTask = false
 	# Start moving towards the first target, LivingRoomPosition
 	current_target = living_room_position
 	# Stop Samuel from walking automatically with game start
@@ -258,7 +260,7 @@ func stop_walking_animation() -> void:
 func show_exclamation() -> void:
 	if exclamation_sprite:
 		exclamation_sprite.visible = true
-		exclamAnimPlayer.play()
+		exclamAnimPlayer.play("Exclamation_Left")
 		
 func stop_exclamation() -> void:
 	if exclamation_sprite:
@@ -360,7 +362,34 @@ func processTasks()-> void:
 			task2Label.text += " +200 Points"
 			node3D.onKey3Pressed()
 			startTask3Timer()
-			
+	
+	elif  target_string in "Say: Go to Kitchen":
+		first_click_time == -1
+		var new_audio = load("res://go-to-kitchen.mp3") as AudioStream
+		goToLivingRoomAudio.stream = new_audio
+		goToLivingRoomAudio.play()
+		time = getElapsedTime()
+		print("elasped time: ", time , "Secs")
+		if(time.to_float() > 0.0 && time.to_float() <=2.0):
+			popupCoach("One need to repeat the sentence three times face to face to Samuel and each sentence should have a 2 seconds gap in between so that Samuel can understand!!")
+			instructionCounter = instructionCounter -1
+		if instructionCounter >=3:
+			#print("button pressed elif")
+			goToLivingRoomAudio.play()
+			moveToKitchenTask = true
+			moveSamuelButton.hide()
+			$SamuelPopup/VBoxContainer.hide()
+			$SamuelPopup.hide()
+			instructionCounter = 0;
+			time = ""
+			moving_to_target = true
+			on_b_pressed()
+			task4Label.add_theme_color_override("font_color", Color(1, 0.5, 0))
+			popupCoach("Task 4 completed! You've earned +200 Points! Please prepare a glass of juice using the blender as a task#5")
+			task4Label.text += " +200 Points"
+			node3D.toggle_camera()
+			#node3D.onKey3Pressed()
+			#startTask3Timer()		
 			
 			
 func startTask3Timer() ->void:

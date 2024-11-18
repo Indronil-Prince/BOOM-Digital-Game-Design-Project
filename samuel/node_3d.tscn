@@ -2118,13 +2118,12 @@ text = "ABCD"
 [node name="BedRoomPosition" type="Node3D" parent="CharacterBody3D"]
 
 [node name="ExclamationSprite" type="Sprite3D" parent="CharacterBody3D"]
-transform = Transform3D(-3.27835e-09, 0, 0.075, 0, 0.075, 0, -0.075, 0, -3.27835e-09, 0.5, 1.5, 0.5)
-visible = false
+transform = Transform3D(-2.18557e-09, 0, 0.05, 0, 0.05, 0, -0.05, 0, -2.18557e-09, 0.5, 1.8707, 0.195534)
 texture = ExtResource("62_efynk")
 hframes = 3
 frame = 2
 region_enabled = true
-region_rect = Rect2(-1535.26, -2.572, 2445.51, 901.563)
+region_rect = Rect2(-1795.58, 165.684, 2950.55, 1026.28)
 
 [node name="ExclamationAnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D/ExclamationSprite"]
 libraries = {
@@ -2172,7 +2171,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="StayTimer" type="Timer" parent="Dialog/Panel2"]
-wait_time = 5.0
+wait_time = 8.0
 one_shot = true
 
 [node name="MoveDownTimer" type="Timer" parent="Dialog/Panel2"]

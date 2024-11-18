@@ -29,19 +29,35 @@ func _process(delta) -> void:
 	settingsButton = $"../settingsButton"
 	moreButton =$"../moreButton"
 	
-func _on_Button_pressed():
-	Tex.texture = load("res://splash-screen1.png")  
-	# Load and show the image
-	timer.start()  # Start the timer
-	#startGameButton = get_node("/root/Node2D/Control/startGameButton")
-	startGameButton.visible = false
-	tipsButton.visible = false
-	objectiveButton.visible = false
-	creditButton.visible = false
-	settingsButton.visible = false
-	moreButton.visible = false
+#func _on_Button_pressed():
+#	Tex.texture = load("res://splash-screen1.png")  
+#	# Load and show the image
+#	timer.start()  # Start the timer
+#	#startGameButton = get_node("/root/Node2D/Control/startGameButton")
+#	startGameButton.visible = false
+#	tipsButton.visible = false
+#	objectiveButton.visible = false
+#	creditButton.visible = false
+	#settingsButton.visible = false
+	#moreButton.visible = false
 
 func _on_Timer_timeout():
 	get_tree().change_scene_to_file("res://node_3d.tscn")
 	#panel2.visible = true
+	
+func _on_Button_pressed():
+	# Load the Splash Screen scene when Start Game is pressed
+	get_tree().change_scene_to_file("res://splash_screen.tscn")
+	
+# Function to load the Credit Page
+func _on_creditButton_pressed():
+	get_tree().change_scene_to_file("res://credit_page.tscn")
+ 
+# Function to load the Objective Page
+func _on_objectiveButton_pressed():
+	get_tree().change_scene_to_file("res://objective_page.tscn")
+ 
+# Function to load the Objective Page
+func _on_tipsCoachButton_pressed():
+	get_tree().change_scene_to_file("res://tips_coach_page.tscn")
 	
