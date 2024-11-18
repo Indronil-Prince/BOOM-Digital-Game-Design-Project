@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=4 uid="uid://cnogeg83t8l07"]
+[gd_scene load_steps=82 format=4 uid="uid://cnogeg83t8l07"]
 
 [ext_resource type="Script" path="res://node_3d.gd" id="1_clm2c"]
 [ext_resource type="PackedScene" uid="uid://berauiwrub2ra" path="res://Bed_single.glb" id="1_itapf"]
@@ -58,7 +58,10 @@
 [ext_resource type="Script" path="res://popup.gd" id="41_rbjhu"]
 [ext_resource type="PackedScene" uid="uid://d0u35nfjuxhi2" path="res://OpenDoorTallCabinet1.glb" id="47_4cvts"]
 [ext_resource type="Texture2D" uid="uid://b6tkt6dr7luf3" path="res://play_button.png" id="49_v021l"]
+[ext_resource type="PackedScene" uid="uid://dsdam5hw3hx7m" path="res://vacuum.gltf" id="50_75ptr"]
 [ext_resource type="AudioStream" uid="uid://d2xkuq2g6n2eu" path="res://GoToLivingRoom.mp3" id="51_68m8a"]
+[ext_resource type="AudioStream" uid="uid://mgwo8pnmnelu" path="res://vacuum-audio.mp3" id="51_vgti6"]
+[ext_resource type="AudioStream" uid="uid://cqetyywlka5o5" path="res://Turning_On_The_vacuuam.mp3" id="52_obuqf"]
 [ext_resource type="FontFile" uid="uid://cvb8m6huv00vy" path="res://ARCADE.TTF" id="55_ijr6n"]
 [ext_resource type="AudioStream" uid="uid://diuisk1iyohlr" path="res://hello_samuel.wav" id="55_ktjls"]
 [ext_resource type="Texture2D" uid="uid://yb14r2fycl4s" path="res://ExclamationMark.png" id="59_pvmtw"]
@@ -1476,6 +1479,33 @@ transform = Transform3D(-3.34258, 0, 0.0132902, 0, 1.7, 0, -0.0391415, 0, -0.313
 [node name="OpenDoorTallCabinet12" parent="kitchen/MeshInstance3D" instance=ExtResource("47_4cvts")]
 transform = Transform3D(2.19997, -5.33596e-05, 0.00152444, 0.00074772, 0.399669, -0.0121961, -0.011158, 0.0162619, 0.299748, 4.86564, 2.35531, -4.53682)
 
+[node name="Vacuum" parent="kitchen/MeshInstance3D" instance=ExtResource("50_75ptr")]
+transform = Transform3D(0.124392, 0.317209, -0.944184, -0.0440442, 0.948354, 0.315649, 1.39377, 0.00165829, 0.0942422, 6.978, 0.658, 3.325)
+
+[node name="VacuumButton" type="Button" parent="kitchen/MeshInstance3D/Vacuum"]
+visible = false
+offset_left = 525.0
+offset_top = 414.0
+offset_right = 720.0
+offset_bottom = 453.0
+action_mode = 0
+text = "Pick up Vacuum Cleaner"
+
+[node name="notifySamuelButton2" type="Button" parent="kitchen/MeshInstance3D/Vacuum"]
+visible = false
+offset_left = 525.0
+offset_top = 449.0
+offset_right = 720.0
+offset_bottom = 488.0
+action_mode = 0
+text = "Verbally notify Samuel"
+
+[node name="VacuumAudio" type="AudioStreamPlayer3D" parent="kitchen/MeshInstance3D/Vacuum"]
+stream = ExtResource("51_vgti6")
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="kitchen/MeshInstance3D/Vacuum"]
+stream = ExtResource("52_obuqf")
+
 [node name="OmniLight3D" parent="kitchen" instance=ExtResource("13_gaocx")]
 transform = Transform3D(0.0892295, -0.993073, -0.0764468, 0.0976925, 0.0851091, -0.991571, 0.991208, 0.0810091, 0.10461, 3.21989, 4.98808, 0.53037)
 light_energy = 1.808
@@ -1501,8 +1531,8 @@ script = ExtResource("34_mnqtc")
 
 [node name="TaskWindow" type="Window" parent="Camera3D"]
 title = "Task List"
-position = Vector2i(814, 36)
-size = Vector2i(800, 430)
+position = Vector2i(1100, 36)
+size = Vector2i(780, 220)
 theme_override_fonts/title_font = ExtResource("55_ijr6n")
 theme_override_font_sizes/title_font_size = 30
 script = ExtResource("37_cp7if")
@@ -1513,7 +1543,7 @@ offset_bottom = 23.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
 theme_override_fonts/font = ExtResource("55_ijr6n")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 25
 text = "1. Get introduced to Samuel. Say 'Hello Samuel' "
 
 [node name="Label2" type="Label" parent="Camera3D/TaskWindow"]
@@ -1521,7 +1551,7 @@ offset_top = 25.0
 offset_right = 265.0
 offset_bottom = 48.0
 theme_override_fonts/font = ExtResource("55_ijr6n")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 25
 text = "2. Move Samuel to the living Room."
 
 [node name="Label3" type="Label" parent="Camera3D/TaskWindow"]
@@ -1529,7 +1559,7 @@ offset_top = 50.0
 offset_right = 350.0
 offset_bottom = 73.0
 theme_override_fonts/font = ExtResource("55_ijr6n")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 25
 text = "3. Setup light, music and  thermostat suitable for Samuel."
 
 [node name="Label4" type="Label" parent="Camera3D/TaskWindow"]
@@ -1537,7 +1567,7 @@ offset_top = 75.0
 offset_right = 175.0
 offset_bottom = 98.0
 theme_override_fonts/font = ExtResource("55_ijr6n")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 25
 text = "4. Move Samuel to Kitchen."
 
 [node name="Label5" type="Label" parent="Camera3D/TaskWindow"]
@@ -1545,7 +1575,7 @@ offset_top = 100.0
 offset_right = 284.0
 offset_bottom = 123.0
 theme_override_fonts/font = ExtResource("55_ijr6n")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 25
 text = "5. Prepare a glass of juice for Samuel"
 
 [node name="Label6" type="Label" parent="Camera3D/TaskWindow"]
@@ -1553,7 +1583,7 @@ offset_top = 125.0
 offset_right = 337.0
 offset_bottom = 148.0
 theme_override_fonts/font = ExtResource("55_ijr6n")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 25
 text = "6. Provide Samuel with food from the fridge"
 
 [node name="Label7" type="Label" parent="Camera3D/TaskWindow"]
@@ -1561,7 +1591,7 @@ offset_top = 150.0
 offset_right = 212.0
 offset_bottom = 173.0
 theme_override_fonts/font = ExtResource("55_ijr6n")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 25
 text = "7. Vacuums clean the space"
 
 [node name="LabelPoint" type="Label" parent="Camera3D/TaskWindow"]
@@ -1583,18 +1613,18 @@ text = "0"
 
 [node name="TimeRemaining" type="Label" parent="Camera3D/TaskWindow"]
 offset_left = 200.0
-offset_top = 207.0
+offset_top = 205.0
 offset_right = 400.0
-offset_bottom = 230.0
+offset_bottom = 228.0
 theme_override_fonts/font = ExtResource("55_ijr6n")
 theme_override_font_sizes/font_size = 20
 text = "Time Remaining:"
 
 [node name="GameTimer" type="Label" parent="Camera3D/TaskWindow"]
 offset_left = 335.0
-offset_top = 207.0
+offset_top = 205.0
 offset_right = 375.0
-offset_bottom = 230.0
+offset_bottom = 228.0
 theme_override_fonts/font = ExtResource("55_ijr6n")
 theme_override_font_sizes/font_size = 20
 text = "300"
@@ -2098,8 +2128,8 @@ transform = Transform3D(0.943613, 0.32705, 0.0513076, -0.327482, 0.944857, 0, -0
 
 [node name="SamuelPopup" type="Popup" parent="CharacterBody3D"]
 title = "Instruction"
-position = Vector2i(1214, 320)
-size = Vector2i(400, 100)
+position = Vector2i(1545, 295)
+size = Vector2i(250, 45)
 visible = true
 unresizable = false
 borderless = false
@@ -2119,6 +2149,7 @@ text = "ABCD"
 
 [node name="ExclamationSprite" type="Sprite3D" parent="CharacterBody3D"]
 transform = Transform3D(-2.18557e-09, 0, 0.05, 0, 0.05, 0, -0.05, 0, -2.18557e-09, 0.5, 1.8707, 0.195534)
+visible = false
 texture = ExtResource("62_efynk")
 hframes = 3
 frame = 2
@@ -2129,6 +2160,30 @@ region_rect = Rect2(-1795.58, 165.684, 2950.55, 1026.28)
 libraries = {
 "": SubResource("AnimationLibrary_xdnxt")
 }
+
+[node name="PositionA" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.452, 0, 0)
+
+[node name="PositionB" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1.522)
+
+[node name="PositionC" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.663)
+
+[node name="PositionD" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.162)
+
+[node name="PositionE" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.754, 0, 0)
+
+[node name="PositionF" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.688, 0, 1.774)
+
+[node name="PositionG" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.067, 0, 1.865)
+
+[node name="FridgePosition" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12.293, -0.17, 8.95)
 
 [node name="BlenderPopup" type="Popup" parent="."]
 transparent_bg = true
@@ -2222,6 +2277,8 @@ texture = ExtResource("62_l0kui")
 [connection signal="pressed" from="living/MeshInstance3D/BassSpeakers12/Window/Popup/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="living/MeshInstance3D/BassSpeakers12/Window/Popup/UpButton" to="." method="_on_VolumeUpButton_pressed"]
 [connection signal="pressed" from="living/MeshInstance3D/BassSpeakers12/Window/Popup/DownButton" to="." method="_on_VolumeDownButton_pressed"]
+[connection signal="pressed" from="kitchen/MeshInstance3D/Vacuum/VacuumButton" to="." method="_on_vacuum_button_pressed"]
+[connection signal="pressed" from="kitchen/MeshInstance3D/Vacuum/notifySamuelButton2" to="." method="_on_notify_samuel_button_2_pressed"]
 [connection signal="pressed" from="CharacterBody3D/SamuelPopup/VBoxContainer/Button" to="CharacterBody3D" method="_on_button_pressed"]
 [connection signal="pressed" from="BlenderPopup/VBoxContainer/Button" to="BlenderPopup" method="_on_Button_pressed"]
 [connection signal="pressed" from="BlenderPopup/VBoxContainer/notifySamuelButton" to="BlenderPopup" method="_on_notify_samuel_button_pressed"]

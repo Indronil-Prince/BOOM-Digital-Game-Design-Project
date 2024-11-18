@@ -25,7 +25,23 @@ var exclamAnimPlayer: AnimationPlayer
 var soundSignifierLabel: Label
 var lightSingnifierLabel: Label
 
+var vacuum_on = false
+var vacuum_pickedup = false
+var vacuum_initial_pos
+var vacuum_initial_rotation
+var notifySamuelforVacuum = false
+var playCountVaccum = 1
+var MAX_PLAY_COUNT = 3
+signal vacuum_turned_on
 
+var food: TextureRect
+var fridgeButton: Button
+var foodPopup: Popup
+var main_cam: Camera3D
+var vacuumButton: Button
+var notifySamuelButton2: Button
+var vacuum: Node3D
+var notifySamuelAudioStreamPlayer2: AudioStreamPlayer3D
 
 var is_playing = false
 var volume_step = 2.0
@@ -69,6 +85,17 @@ func _ready():
 	lightSingnifierLabel = $living/MeshInstance3D/LightMeter/LightWindow/LightPopup/lightSignifierLabel
 	lightPlayButton = $living/MeshInstance3D/LightMeter/LightWindow/LightPopup/LightPlayButton
 	
+	food = get_node("/root/Node3D/kitchen/MeshInstance3D/TopFridge12/FridgeDoor/TextureRect")
+	fridgeButton = $kitchen/MeshInstance3D/TopFridge12/FridgeButton
+	vacuumButton = $kitchen/MeshInstance3D/Vacuum/VacuumButton
+	notifySamuelButton2 = $kitchen/MeshInstance3D/Vacuum/notifySamuelButton2
+	main_cam = $Camera3D
+	vacuum = $kitchen/MeshInstance3D/Vacuum
+	vacuum_initial_pos = vacuum.global_transform.origin
+	vacuum_initial_rotation = vacuum.rotation_degrees
+	notifySamuelAudioStreamPlayer2 = $kitchen/MeshInstance3D/Vacuum/AudioStreamPlayer3D2
+	
+	
 	var trimmedValue: String = "%0.2f" % light.light_energy
 	lightSingnifierLabel.text = str(trimmedValue)
 	lightSingnifierLabel.modulate = Color(1, 0, 0)
@@ -87,6 +114,7 @@ func set_children_visibility(node, visibility):
 func _process(delta: float) -> void:
 	
 	checkTemp()
+	checkVacuum()
 	if Input.is_key_pressed(KEY_Z):
 		toggle_camera()
 	if Input.is_key_pressed(KEY_3):
@@ -245,6 +273,57 @@ func checkTemperature() -> bool:
 		return true
 	return false
 	
-		
-		
-	
+func checkVacuum() -> void:		
+	if main_cam.global_transform.origin.x <= -5.00:
+		vacuumButton.visible = true
+		notifySamuelButton2.visible = true
+	if vacuum_pickedup == true:
+		if vacuumButton.text == "Pick up Vacuum Cleaner":
+			vacuumButton.text = "Turn on Vacuum Cleaner"
+			vacuum.rotate_y(deg_to_rad(180))
+		vacuum.global_transform.origin.x = main_cam.global_transform.origin.x - 1.6
+		vacuum.global_transform.origin.y= main_cam.global_transform.origin.y - 2.5
+		vacuum.global_transform.origin.z = main_cam.global_transform.origin.z
+	if vacuum_pickedup == false:
+		vacuum.global_transform.origin = vacuum_initial_pos
+		if main_cam.global_transform.origin.x > -5.00:
+			vacuumButton.visible = false
+			notifySamuelButton2.visible = false
+
+ 
+func _on_vacuum_button_pressed() -> void:
+	if vacuum_pickedup == false:
+		vacuum_pickedup = true
+	elif vacuum_pickedup == true and vacuumButton.text == "Turn on Vacuum Cleaner":
+		vacuumButton.text = "Turn off Vacuum Cleaner"
+		emit_signal("vacuum_turned_on")
+		$kitchen/MeshInstance3D/Vacuum/VacuumAudio.play()
+	elif vacuum_pickedup == true and vacuumButton.text == "Turn off Vacuum Cleaner":
+		$kitchen/MeshInstance3D/Vacuum/VacuumAudio.stop()
+		vacuumButton.text = "Pick up Vacuum Cleaner"
+		vacuum_pickedup = false
+		vacuum.rotation_degrees = vacuum_initial_rotation
+func _on_notify_samuel_button_2_pressed() -> void:
+	print (" Node3D -> _on_notify_samuel_button_2_pressed()")
+	notifySamuelforVacuum = true
+	var turning_on_vacuum_audio = load("res://Turning_On_The_vacuuam.mp3") as AudioStream
+	notifySamuelAudioStreamPlayer2.connect("finished", Callable(self, "_on_vacuum_audio_finished"))
+	notifySamuelAudioStreamPlayer2.stream = turning_on_vacuum_audio
+	notifySamuelAudioStreamPlayer2.play()
+ 
+func _on_vacuum_audio_finished() -> void:
+	if playCountVaccum < MAX_PLAY_COUNT:
+		delay(4)
+		playCountVaccum += 1
+		notifySamuelAudioStreamPlayer2.play()
+	else:
+		print("Audio finished playing 3 times!")
+ 
+func delay(seconds) ->void:
+	print("Inside delay")
+	var timer = Timer.new()
+	timer.wait_time = seconds
+	timer.one_shot = false
+	add_child(timer)
+	timer.start()
+	await timer.timeout

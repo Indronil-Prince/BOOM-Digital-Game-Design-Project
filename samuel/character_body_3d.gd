@@ -10,6 +10,19 @@ extends CharacterBody3D
 @onready var exclamation_sprite = $ExclamationSprite  # Reference to the exclamation sprite
 @onready var exclamAnimPlayer = $ExclamationSprite/ExclamationAnimationPlayer
 
+@onready var position_a = $PositionA.global_transform.origin  # Position A
+@onready var position_b = $PositionB.global_transform.origin  # Position B
+@onready var position_c = $PositionC.global_transform.origin  # Position C
+@onready var position_d = $PositionD.global_transform.origin  # Position D
+@onready var position_e = $PositionE.global_transform.origin  # Position E
+@onready var position_f = $PositionF.global_transform.origin  # Position F
+@onready var position_g = $PositionG.global_transform.origin  # Position G
+
+@onready var fridge_position = $FridgePosition.global_transform.origin
+
+var t_sequence_active = false  # To track if the T sequence is active
+var t_sequence_stage = 0  # To track the stage of the sequence (A -> B -> C -> Bedroom)
+
 const  TIME_THRESHOLD = 20
 
 var moveSamuelButton : Button
@@ -76,6 +89,11 @@ func _ready():
 	blender_node.connect("blender_turned_on", Callable(self, "_on_blender_turned_on"))
 	goToLivingRoomAudio = get_node("/root/Node3D/kitchen/AudioStreamKitchen")
 	
+	node3D = $".."
+	node3D.connect("vacuum_turned_on", Callable(self, "_on_vacuum_turned_on"))
+	goToLivingRoomAudio = get_node("/root/Node3D/kitchen/AudioStreamKitchen")
+	
+	
 	pointLabel = $"../Camera3D/TaskWindow/Point"
 	gameTimerLabel = $"../Camera3D/TaskWindow/GameTimer"
 	dialogAudioPlayer = $"../Camera3D/TaskWindow/dialogAudioPlayer"
@@ -100,7 +118,11 @@ func _process(delta: float) -> void:
 		on_l_pressed()
 	elif Input.is_key_pressed(KEY_C):
 		on_c_pressed()
-
+	elif Input.is_key_pressed(KEY_T):
+		on_t_pressed()  # Start the sequence for T key
+	elif Input.is_key_pressed(KEY_F):
+		on_f_pressed()
+	
 	moveSamuelPopup.popup()
 	handleTimer(delta)
 	
@@ -149,6 +171,10 @@ func _process(delta: float) -> void:
 			moving_to_target = false
 			stop_walking_animation()
 			print("Target reached.")
+		
+		#If sequence is active, move to the next position in the sequence
+			if t_sequence_active:
+				continue_t_sequence()  # Call `on_t_pressed` again to set the next target	
 
 			if direct_move:
 				# Custom sequence steps for direct move mode
@@ -246,6 +272,8 @@ func _on_blender_turned_on() -> void:
 			popupCoach("Task 6 completed! You've earned +200 Points! Please vacuum clean the kitchen as a task#6")
 			task5Label.text += " +200 Points"
 			blenderTask = true
+			on_f_pressed()
+			node3D.toggle_camera()
 		elif blender_node.notifySamuelForBlender == false:
 			returning = true
 			target_stage = 1
@@ -325,7 +353,6 @@ func popupCoach(dialog: String)-> void :
 	panel2.startCoach(dialog)
 	var new_texture = load("res://coach.png")
 	panelChar.texture = new_texture
-		
 
 func popupSamuel(dialog: String)-> void:
 	print("Samuel popup is called")	
@@ -338,9 +365,7 @@ func popupSamuel(dialog: String)-> void:
 func processTasks()-> void:
 	instructionCounter+=1
 	#target_string = "Say: Hello Samuel!"
-	
 	if target_string in "Say: Hello Samuel!" :
-		
 		dialogAudioPlayer.play()
 		time = getElapsedTime()
 		print("elasped time: ", time , "Secs")
@@ -414,8 +439,6 @@ func processTasks()-> void:
 			#node3D.onKey3Pressed()
 			#startTask3Timer()	
 			
-			
-			
 func startTask3Timer() ->void:
 	var timer = Timer.new()
 	timer.wait_time = TIME_THRESHOLD  # Set the timer to 30 seconds
@@ -437,6 +460,78 @@ func _on_task3_timer_timeout() -> void:
 		popupSamuel("I am struggling with temperature /light Intesity / Sound. Plase adjust! And I am moving back to my room")
 		show_exclamation()
 		on_c_pressed()
-		
-	 
+
+# Function for T key press
+
+
+func on_t_pressed() -> void:
+# Ensure the sequence is only activated if it's not already active
+	if not t_sequence_active:
+		print("Pressed T Button - Starting sequence from Bedroom to A -> B -> C -> D -> E -> F -> G -> Bedroom")
+		t_sequence_active = true  # Activate the sequence
+		# Start the sequence from Bedroom to Position A
+		current_target = position_a
+		moving_to_target = true
+		face_target(current_target)
+		start_walking_animation()
+# Function to continue to the next target in the sequence
+
+func continue_t_sequence() -> void:
+	if not t_sequence_active:
+		return  # Exit if sequence is no longer active
+	# Check current position and set the next target accordingly
+	if global_transform.origin.distance_to(position_a) < 0.1:
+		current_target = position_b
+	elif global_transform.origin.distance_to(position_b) < 0.1:
+		current_target = position_c
+	elif global_transform.origin.distance_to(position_c) < 0.1:
+		current_target = position_d
+	elif global_transform.origin.distance_to(position_d) < 0.1:
+		current_target = position_e
+	elif global_transform.origin.distance_to(position_e) < 0.1:
+		current_target = position_f
+	elif global_transform.origin.distance_to(position_f) < 0.1:
+		current_target = position_g
+	elif global_transform.origin.distance_to(position_g) < 0.1:
+		# Final target: back to Bedroom
+		current_target = bedroom_position
+	else:
+		# End sequence once back at the bedroom
+		t_sequence_active = false
+		print("Sequence complete. Returned to Bedroom.")
+		return
+	# Start movement and animation towards the next target
+	moving_to_target = true
+	face_target(current_target)
+	start_walking_animation()
+
+func on_f_pressed() -> void:
+	print("Pressed F Button - Starting Sequence from Blender Position")
+	moving_to_target = true
+	target_stage = 0  # Reset to start the sequence from the beginning
+	current_target = fridge_position  # Start sequence from Living Room
+	direct_move = true
+	returning = false  # Ensure forward sequence
+	face_target(current_target)
+	start_walking_animation()
 	
+func _on_vacuum_turned_on() -> void:
+	#if sayHelloTask == true && moveToLivingRoomTask == true &&	adjustLightMusicTempTask == true && moveToKitchenTask == true:
+	if node3D.notifySamuelforVacuum == true:
+		task7Label.add_theme_color_override("font_color", Color(1, 0.5, 0))
+		popupCoach("Task 7 completed! You've earned +200 Points! GAME OVER!! CONGRATULATIONS")
+		task7Label.text += " +200 Points"
+		vaccuamCleanTask = true
+		
+		#Game End Logic
+		#moveSamuelButton.text = "Game Over! Congratulations!"
+		#moveSamuelButton.disabled = true
+		
+	elif node3D.notifySamuelforVacuum == false:
+		print("Condition entered!")
+		moving_to_target = true
+		face_target(blender_position)
+		current_target = blender_position
+		start_walking_animation()
+		if global_transform.origin.distance_to(blender_position) < 0.1:
+			on_c_pressed() ####Bedroom position not working
