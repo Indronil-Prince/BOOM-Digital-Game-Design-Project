@@ -51,7 +51,7 @@ var target_stage = 0  # Track which target we are moving towards (0 for living r
 var turning = false  # Track whether the character is currently turning
 var returning = false  # Flag to check if character is returning after blender is on
 var direct_move = false  # Flag to check if we are directly moving to a target without sequence
-
+var blender_node
 func _ready():
 	sayHelloTask = false
 	moveToLivingRoomTask = false
@@ -72,7 +72,7 @@ func _ready():
 	taskWindowPoint = get_node("/root/Node3D/Camera3D/TaskWindow/Point")
 
 	# Connect the blender's "blender_turned_on" signal from BlenderPopup
-	var blender_node = get_node("/root/Node3D/BlenderPopup")  # Adjusted path to BlenderPopup
+	blender_node = get_node("/root/Node3D/BlenderPopup")  # Adjusted path to BlenderPopup
 	blender_node.connect("blender_turned_on", Callable(self, "_on_blender_turned_on"))
 	goToLivingRoomAudio = get_node("/root/Node3D/kitchen/AudioStreamKitchen")
 	
@@ -120,6 +120,22 @@ func _process(delta: float) -> void:
 		moveSamuelButton.show()
 		$SamuelPopup/VBoxContainer.show()
 		$SamuelPopup.show()
+	elif sayHelloTask == true && moveToLivingRoomTask == true &&	adjustLightMusicTempTask == true && moveToKitchenTask == true:
+		print("Checking on Blender Task")
+		if blender_node.notifySamuelForBlender == true:
+			task5Label.add_theme_color_override("font_color", Color(1, 0.5, 0))
+			popupCoach("Task 5 completed! You've earned +200 Points! Please vacuum clean the kitchen as a task#6")
+			task5Label.text += " +200 Points"
+		elif blender_node.notifySamuelForBlender == false:
+			#on_c_pressed()
+			#_on_blender_turned_on()
+			#show_exclamation() 
+			returning = true
+			target_stage = 1
+			show_exclamation()
+			speed = 4.0
+			$BedRoomPosition
+			
 
 	# Main movement logic
 	if moving_to_target and not turning:
@@ -224,15 +240,22 @@ func on_c_pressed() -> void:
 		turn_and_move_to_next_target(kitchen_position)
 
 func _on_blender_turned_on() -> void:
-	returning = true
-	target_stage = 1
-	show_exclamation()
-	speed = 4.0
-	$BedRoomPosition
-	face_target(kitchen_position)
-	current_target = kitchen_position
-	moving_to_target = true
-	start_walking_animation()
+	if sayHelloTask == true && moveToLivingRoomTask == true &&	adjustLightMusicTempTask == true && moveToKitchenTask == true:
+		if blender_node.notifySamuelForBlender == true:
+			task5Label.add_theme_color_override("font_color", Color(1, 0.5, 0))
+			popupCoach("Task 6 completed! You've earned +200 Points! Please vacuum clean the kitchen as a task#6")
+			task5Label.text += " +200 Points"
+			blenderTask = true
+		elif blender_node.notifySamuelForBlender == false:
+			returning = true
+			target_stage = 1
+			show_exclamation()
+			speed = 4.0
+			$BedRoomPosition
+			face_target(kitchen_position)
+			current_target = kitchen_position
+			moving_to_target = true
+			start_walking_animation()
 
 func face_target(target_position: Vector3) -> void:
 	var direction = (target_position - global_transform.origin).normalized()
@@ -389,7 +412,8 @@ func processTasks()-> void:
 			task4Label.text += " +200 Points"
 			node3D.toggle_camera()
 			#node3D.onKey3Pressed()
-			#startTask3Timer()		
+			#startTask3Timer()	
+			
 			
 			
 func startTask3Timer() ->void:

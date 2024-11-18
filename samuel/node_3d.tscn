@@ -2142,6 +2142,12 @@ offset_bottom = 40.0
 [node name="Button" type="Button" parent="BlenderPopup/VBoxContainer"]
 layout_mode = 2
 
+[node name="notifySamuelButton" type="Button" parent="BlenderPopup/VBoxContainer"]
+layout_mode = 2
+text = "Verbally Notify Samuel!"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BlenderPopup/VBoxContainer"]
+
 [node name="Dialog" parent="." instance=ExtResource("61_b3nau")]
 
 [node name="Panel2" type="Panel" parent="Dialog"]
@@ -2218,3 +2224,4 @@ texture = ExtResource("62_l0kui")
 [connection signal="pressed" from="living/MeshInstance3D/BassSpeakers12/Window/Popup/DownButton" to="." method="_on_VolumeDownButton_pressed"]
 [connection signal="pressed" from="CharacterBody3D/SamuelPopup/VBoxContainer/Button" to="CharacterBody3D" method="_on_button_pressed"]
 [connection signal="pressed" from="BlenderPopup/VBoxContainer/Button" to="BlenderPopup" method="_on_Button_pressed"]
+[connection signal="pressed" from="BlenderPopup/VBoxContainer/notifySamuelButton" to="BlenderPopup" method="_on_notify_samuel_button_pressed"]
