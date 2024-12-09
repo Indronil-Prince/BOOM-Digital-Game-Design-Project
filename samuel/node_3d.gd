@@ -42,6 +42,7 @@ var vacuumButton: Button
 var notifySamuelButton2: Button
 var vacuum: Node3D
 var notifySamuelAudioStreamPlayer2: AudioStreamPlayer3D
+var FridgeCamera: Camera3D
 
 var is_playing = false
 var volume_step = 2.0
@@ -49,6 +50,7 @@ var intensity_step = 0.5
 var min_intensity = 0.0
 var max_intensity = 10.0
 var roomTemp = 100
+var fridgeOpen = false
 
  
 func _ready():
@@ -84,8 +86,8 @@ func _ready():
 	soundSignifierLabel = $living/MeshInstance3D/BassSpeakers12/Window/Popup/SoundSignifierLabel
 	lightSingnifierLabel = $living/MeshInstance3D/LightMeter/LightWindow/LightPopup/lightSignifierLabel
 	lightPlayButton = $living/MeshInstance3D/LightMeter/LightWindow/LightPopup/LightPlayButton
+	food = $kitchen/MeshInstance3D/TopFridge12/FoodTexture
 	
-	food = get_node("/root/Node3D/kitchen/MeshInstance3D/TopFridge12/FridgeDoor/TextureRect")
 	fridgeButton = $kitchen/MeshInstance3D/TopFridge12/FridgeButton
 	vacuumButton = $kitchen/MeshInstance3D/Vacuum/VacuumButton
 	notifySamuelButton2 = $kitchen/MeshInstance3D/Vacuum/notifySamuelButton2
@@ -94,6 +96,8 @@ func _ready():
 	vacuum_initial_pos = vacuum.global_transform.origin
 	vacuum_initial_rotation = vacuum.rotation_degrees
 	notifySamuelAudioStreamPlayer2 = $kitchen/MeshInstance3D/Vacuum/AudioStreamPlayer3D2
+	FridgeCamera = $kitchen/MeshInstance3D/TopFridge12/FridgeCamera3D
+	fridgeButton = $kitchen/MeshInstance3D/TopFridge12/FridgeButton
 	
 	
 	var trimmedValue: String = "%0.2f" % light.light_energy
@@ -115,10 +119,13 @@ func _process(delta: float) -> void:
 	
 	checkTemp()
 	checkVacuum()
+	checkFridge()
 	if Input.is_key_pressed(KEY_Z):
 		toggle_camera()
 	if Input.is_key_pressed(KEY_3):
 		onKey3Pressed()
+	if Input.is_key_pressed(KEY_5):
+		onKey5Pressed()
 		
 		#global_transform.origin = Vector3(6.752, 0.517, 9.221)
 
@@ -241,6 +248,36 @@ func onKey3Pressed() -> void:
 		soundWindow.hide()
 		lightWindow.hide()
 		tempWindow.hide()
+		
+func onKey5Pressed() -> void:
+	if $kitchen/MeshInstance3D/TopFridge12/FridgeCamera.current == false:
+		$kitchen/MeshInstance3D/TopFridge12/FridgeCamera.current = true
+		fridgeButton.visible = true
+			
+	else:
+		$kitchen/MeshInstance3D/TopFridge12/FridgeCamera.current = false
+		fridgeButton.visible = false
+
+func checkFridge() -> void:
+	if fridgeOpen == true:
+		fridgeButton.text = "Close Fridge"
+		$kitchen/MeshInstance3D/TopFridge12/FridgeDoor.visible = true
+		food.visible = true
+		$kitchen/MeshInstance3D/TopFridge12/FoodPopup.visible = true
+	else:
+		fridgeButton.text = "Open Fridge"
+		$kitchen/MeshInstance3D/TopFridge12/FridgeDoor.visible = false
+		food.visible = false
+		
+
+func _on_fridge_button_pressed() -> void:
+	if fridgeOpen == false:
+		print("Fridge Open")
+		fridgeOpen = true
+	else:
+		fridgeOpen = false
+		print("Fridge Closed")
+
 
 func checkSound() -> bool:
 	#print("Inside checkSound")

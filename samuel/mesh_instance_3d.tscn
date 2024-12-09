@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://bspjio7th6kle"]
 
-[ext_resource type="PackedScene" uid="uid://dtok2aupexwyu" path="res://couch.gltf" id="1_gyung"]
-[ext_resource type="PackedScene" uid="uid://ykfras7mdbyg" path="res://Table_03.glb" id="2_mc850"]
-[ext_resource type="PackedScene" uid="uid://clkfq5bp05hrd" path="res://cactus_medium_B.gltf" id="3_l5wop"]
-[ext_resource type="PackedScene" uid="uid://cj4hajn5fyopx" path="res://couch_pillows.gltf" id="4_xg0uc"]
-[ext_resource type="PackedScene" uid="uid://d2qgn8clo0yiv" path="res://lamp_standing.gltf" id="5_k8aom"]
-[ext_resource type="PackedScene" uid="uid://cppuyxxv4seru" path="res://table_low.gltf" id="6_iqhqy"]
-[ext_resource type="PackedScene" uid="uid://ck6fu1752g6v4" path="res://WideDresser1.glb" id="7_3e8o7"]
-[ext_resource type="PackedScene" uid="uid://ddf1252gguhdn" path="res://Tv1.glb" id="8_xkrqb"]
+[ext_resource type="PackedScene" uid="uid://cw1k7sc4qu2us" path="res://couch.gltf" id="1_gyung"]
+[ext_resource type="PackedScene" uid="uid://dhopaufose3rk" path="res://Table_03.glb" id="2_mc850"]
+[ext_resource type="PackedScene" uid="uid://bdtbanytyh113" path="res://cactus_medium_B.gltf" id="3_l5wop"]
+[ext_resource type="PackedScene" uid="uid://csoigvwfselfv" path="res://couch_pillows.gltf" id="4_xg0uc"]
+[ext_resource type="PackedScene" uid="uid://c2dq6wengaqwq" path="res://lamp_standing.gltf" id="5_k8aom"]
+[ext_resource type="PackedScene" uid="uid://bt21bwd3us24k" path="res://table_low.gltf" id="6_iqhqy"]
+[ext_resource type="PackedScene" uid="uid://mowm15ttr5yn" path="res://WideDresser1.glb" id="7_3e8o7"]
+[ext_resource type="PackedScene" uid="uid://ch8kwrf0m42u1" path="res://Tv1.glb" id="8_xkrqb"]
 
 [node name="MeshInstance3D" type="MeshInstance3D"]
 

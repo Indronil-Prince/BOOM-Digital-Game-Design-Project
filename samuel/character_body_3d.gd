@@ -146,8 +146,9 @@ func _process(delta: float) -> void:
 		print("Checking on Blender Task")
 		if blender_node.notifySamuelForBlender == true:
 			task5Label.add_theme_color_override("font_color", Color(1, 0.5, 0))
-			popupCoach("Task 5 completed! You've earned +200 Points! Please vacuum clean the kitchen as a task#6")
+			popupCoach("Task 5 completed! You've earned +200 Points! Please pick some food for Samuel as task#6")
 			task5Label.text += " +200 Points"
+			$"../kitchen/MeshInstance3D/BlenderTable/PlasticCup12".visible = true
 		elif blender_node.notifySamuelForBlender == false:
 			#on_c_pressed()
 			#_on_blender_turned_on()
@@ -269,7 +270,7 @@ func _on_blender_turned_on() -> void:
 	if sayHelloTask == true && moveToLivingRoomTask == true &&	adjustLightMusicTempTask == true && moveToKitchenTask == true:
 		if blender_node.notifySamuelForBlender == true:
 			task5Label.add_theme_color_override("font_color", Color(1, 0.5, 0))
-			popupCoach("Task 6 completed! You've earned +200 Points! Please vacuum clean the kitchen as a task#6")
+			popupCoach("Task 5 completed! You've earned +200 Points! Please vacuum clean the kitchen as a task#6")
 			task5Label.text += " +200 Points"
 			blenderTask = true
 			on_f_pressed()
@@ -535,3 +536,12 @@ func _on_vacuum_turned_on() -> void:
 		start_walking_animation()
 		if global_transform.origin.distance_to(blender_position) < 0.1:
 			on_c_pressed() ####Bedroom position not working
+
+
+func _on_red_bowl_pressed() -> void:
+	task6Label.add_theme_color_override("font_color", Color(1, 0.5, 0))
+	popupCoach("You choose the correct bowl of Samuel's color code. Task 6 completed! You've earned +200 Points! Please vacuum clean the kitchen as a task#7")
+	task6Label.text += " +200 Points"
+
+func _on_blue_bowl_pressed() -> void:
+	pass # Replace with function body.
